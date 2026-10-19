@@ -9,8 +9,8 @@ __pycache__/
 *.log
 
 # Compiled Go binaries
-prism-gateway
-bin/prism-gateway
+/prism-gateway
+/bin/prism-gateway
 
 # Local plugin symlink (source managed in livekit-agents monorepo)
 plugins/livekit-plugins-posthog
