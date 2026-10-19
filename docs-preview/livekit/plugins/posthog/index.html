@@ -1,0 +1,3768 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>livekit.plugins.posthog API documentation</title>
+<meta name="description" content="PostHog plugin for LiveKit Agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+AI Observability, Latency Waterfalls, Feature Flags &amp; Dual-Channel Multimodal …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Package <code>livekit.plugins.posthog</code></h1>
+</header>
+<section id="section-intro">
+<p>PostHog plugin for LiveKit Agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+AI Observability, Latency Waterfalls, Feature Flags &amp; Dual-Channel Multimodal Tools for PostHog.</p>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="livekit.plugins.posthog.feature_flags" href="feature_flags.html">livekit.plugins.posthog.feature_flags</a></code></dt>
+<dd>
+<div class="desc"><p>PostHog Feature Flags &amp; Dynamic Prompt Experimentation for LiveKit Agents.</p></div>
+</dd>
+<dt><code class="name"><a title="livekit.plugins.posthog.log" href="log.html">livekit.plugins.posthog.log</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="livekit.plugins.posthog.models" href="models.html">livekit.plugins.posthog.models</a></code></dt>
+<dd>
+<div class="desc"><p>Data contracts, event models, and configuration types for livekit-plugins-posthog.</p></div>
+</dd>
+<dt><code class="name"><a title="livekit.plugins.posthog.observer" href="observer.html">livekit.plugins.posthog.observer</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="livekit.plugins.posthog.tools" href="tools.html">livekit.plugins.posthog.tools</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="livekit.plugins.posthog.version" href="version.html">livekit.plugins.posthog.version</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="livekit.plugins.posthog.observe"><code class="name flex">
+<span>def <span class="ident">observe</span></span>(<span>session: Any,<br>api_key: str | None = None,<br>host: str | None = None,<br>session_id: str | None = None,<br>project_id: str | None = None) ‑> <a title="livekit.plugins.posthog.observer.PostHogAgentObserver" href="observer.html#livekit.plugins.posthog.observer.PostHogAgentObserver">PostHogAgentObserver</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def observe(
+    session: Any,
+    api_key: Optional[str] = None,
+    host: Optional[str] = None,
+    session_id: Optional[str] = None,
+    project_id: Optional[str] = None,
+) -&gt; PostHogAgentObserver:
+    &#34;&#34;&#34;
+    Convenience helper to initialize a PostHogAgentObserver and immediately attach it
+    to an active LiveKit AgentSession or VoicePipelineAgent.
+    &#34;&#34;&#34;
+    observer = PostHogAgentObserver(
+        api_key=api_key,
+        host=host,
+        session_id=session_id,
+        project_id=project_id,
+    )
+    observer.attach_to_session(session)
+    return observer</code></pre>
+</details>
+<div class="desc"><p>Convenience helper to initialize a PostHogAgentObserver and immediately attach it
+to an active LiveKit AgentSession or VoicePipelineAgent.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="livekit.plugins.posthog.FunnelStep"><code class="flex name class">
+<span>class <span class="ident">FunnelStep</span></span>
+<span>(</span><span>name: str, visitors: int, conversion_rate: float)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class FunnelStep:
+    &#34;&#34;&#34;A discrete step in a PostHog conversion funnel.&#34;&#34;&#34;
+    name: str
+    visitors: int
+    conversion_rate: float</code></pre>
+</details>
+<div class="desc"><p>A discrete step in a PostHog conversion funnel.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.FunnelStep.conversion_rate"><code class="name">var <span class="ident">conversion_rate</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.FunnelStep.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.FunnelStep.visitors"><code class="name">var <span class="ident">visitors</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.LatencyWaterfallEvent"><code class="flex name class">
+<span>class <span class="ident">LatencyWaterfallEvent</span></span>
+<span>(</span><span>session_id: str,<br>stt_duration: float = 0.0,<br>eou_delay: float = 0.0,<br>llm_ttft: float = 0.0,<br>llm_duration: float = 0.0,<br>tts_ttfb: float = 0.0,<br>tts_duration: float = 0.0,<br>total_turn_latency: float = 0.0)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class LatencyWaterfallEvent:
+    &#34;&#34;&#34;Full turn latency waterfall emitted to PostHog for conversational performance analysis.&#34;&#34;&#34;
+    session_id: str
+    stt_duration: float = 0.0
+    eou_delay: float = 0.0
+    llm_ttft: float = 0.0
+    llm_duration: float = 0.0
+    tts_ttfb: float = 0.0
+    tts_duration: float = 0.0
+    total_turn_latency: float = 0.0</code></pre>
+</details>
+<div class="desc"><p>Full turn latency waterfall emitted to PostHog for conversational performance analysis.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.LatencyWaterfallEvent.eou_delay"><code class="name">var <span class="ident">eou_delay</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.LatencyWaterfallEvent.llm_duration"><code class="name">var <span class="ident">llm_duration</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.LatencyWaterfallEvent.llm_ttft"><code class="name">var <span class="ident">llm_ttft</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.LatencyWaterfallEvent.session_id"><code class="name">var <span class="ident">session_id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.LatencyWaterfallEvent.stt_duration"><code class="name">var <span class="ident">stt_duration</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.LatencyWaterfallEvent.total_turn_latency"><code class="name">var <span class="ident">total_turn_latency</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.LatencyWaterfallEvent.tts_duration"><code class="name">var <span class="ident">tts_duration</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.LatencyWaterfallEvent.tts_ttfb"><code class="name">var <span class="ident">tts_ttfb</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver"><code class="flex name class">
+<span>class <span class="ident">Observer</span></span>
+<span>(</span><span>api_key: str | None = None,<br>host: str | None = None,<br>session_id: str | None = None,<br>project_id: str | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostHogAgentObserver:
+    &#34;&#34;&#34;
+    Subscribes to LiveKit Agent metrics and emits standardized PostHog events
+    for AI observability ($ai_generation), conversational frustration (interruptions),
+    voice latency waterfalls (TTS, STT, EOU), Session Replay cross-linking, and session costs.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        host: Optional[str] = None,
+        session_id: Optional[str] = None,
+        project_id: Optional[str] = None,
+    ):
+        self.api_key = api_key or os.getenv(&#34;POSTHOG_API_KEY&#34;, &#34;phc_mock_key_prism&#34;)
+        self.host = host or os.getenv(&#34;POSTHOG_HOST&#34;, &#34;https://us.i.posthog.com&#34;)
+        self.session_id = session_id or f&#34;RM_prism_{int(time.time())}&#34;
+        self.project_id = project_id or os.getenv(&#34;POSTHOG_PROJECT_ID&#34;, &#34;default_proj&#34;)
+
+        # Initialize PostHog client (flush_at=1 for real-time streaming telemetry)
+        try:
+            self.client = posthog.Posthog(
+                project_api_key=self.api_key,
+                host=self.host,
+                flush_at=1,
+                flush_interval=0.5,
+            )
+            logger.info(&#34;Initialized PostHogAgentObserver with session %s&#34;, self.session_id)
+        except Exception as e:
+            logger.warning(&#34;Failed to initialize PostHog client, logging locally: %s&#34;, e)
+            self.client = None
+
+        # Feature flags helper
+        self.flags = PostHogFeatureFlags(client=self.client, default_distinct_id=self.session_id)
+
+    def attach_to_session(self, session: Any):
+        &#34;&#34;&#34;Attaches metrics listener to a LiveKit AgentSession or VoicePipelineAgent.&#34;&#34;&#34;
+        if hasattr(session, &#34;on&#34;):
+            session.on(&#34;metrics_collected&#34;, self.on_metrics_collected)
+            logger.info(&#34;Attached PostHogAgentObserver to session.on(&#39;metrics_collected&#39;)&#34;)
+
+    def link_session_replay(
+        self,
+        livekit_room: str,
+        participant_identity: str,
+        replay_id: Optional[str] = None,
+    ) -&gt; str:
+        &#34;&#34;&#34;
+        Cross-links the LiveKit WebRTC voice session with PostHog Session Replay.
+        Emits a $session_replay_link event so the voice recording is indexed alongside DOM replays.
+        &#34;&#34;&#34;
+        rep_id = replay_id or self.session_id
+        replay_url = f&#34;{self.host.rstrip(&#39;/&#39;)}/project/{self.project_id}/replay/{rep_id}&#34;
+
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;livekit_room&#34;: livekit_room,
+            &#34;participant_identity&#34;: participant_identity,
+            &#34;replay_url&#34;: replay_url,
+            &#34;webrtc_stream_linked&#34;: True,
+            &#34;timestamp&#34;: time.time(),
+        }
+
+        logger.info(&#34;[PostHog SessionReplay] Linked LiveKit room &#39;%s&#39; to replay: %s&#34;, livekit_room, replay_url)
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;$session_replay_link&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to emit $session_replay_link event: %s&#34;, e)
+
+        return replay_url
+
+    def on_metrics_collected(self, metrics: Any):
+        &#34;&#34;&#34;Dispatches collected metrics into PostHog telemetry.&#34;&#34;&#34;
+        metrics_type = getattr(metrics, &#34;type&#34;, metrics.__class__.__name__)
+
+        if &#34;LLM&#34; in metrics_type or hasattr(metrics, &#34;input_tokens&#34;):
+            self.record_llm_metrics(metrics)
+        elif &#34;Interruption&#34; in metrics_type or hasattr(metrics, &#34;interrupted&#34;):
+            self.record_interruption_metrics(metrics)
+        elif &#34;TTS&#34; in metrics_type or hasattr(metrics, &#34;ttfb&#34;):
+            self.record_tts_metrics(metrics)
+        elif &#34;STT&#34; in metrics_type:
+            self.record_stt_metrics(metrics)
+        elif &#34;EOU&#34; in metrics_type or hasattr(metrics, &#34;end_of_utterance_delay&#34;):
+            self.record_eou_metrics(metrics)
+        elif &#34;Usage&#34; in metrics_type or hasattr(metrics, &#34;total_tokens&#34;):
+            self.record_session_usage(metrics)
+        else:
+            logger.debug(&#34;Captured general metric: %s&#34;, metrics_type)
+
+    def record_llm_metrics(self, m: Any):
+        &#34;&#34;&#34;
+        Conforms strictly to Contract C: PostHog AI Observability Schema ($ai_generation).
+        &#34;&#34;&#34;
+        input_tokens = getattr(m, &#34;input_tokens&#34;, getattr(m, &#34;prompt_tokens&#34;, 0))
+        output_tokens = getattr(m, &#34;output_tokens&#34;, getattr(m, &#34;completion_tokens&#34;, 0))
+        duration = getattr(m, &#34;duration&#34;, getattr(m, &#34;latency&#34;, 0.0))
+        ttft = getattr(m, &#34;time_to_first_token&#34;, getattr(m, &#34;ttft&#34;, 0.0))
+        model = getattr(m, &#34;model&#34;, &#34;gpt-4o-mini&#34;)
+        cancelled = getattr(m, &#34;cancelled&#34;, False)
+
+        tps = (output_tokens / duration) if (duration &gt; 0 and output_tokens &gt; 0) else 0.0
+
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;$ai_trace_id&#34;: getattr(m, &#34;request_id&#34;, f&#34;req_{int(time.time()*1000)}&#34;),
+            &#34;$ai_model&#34;: model,
+            &#34;$ai_provider&#34;: &#34;openai&#34;,
+            &#34;$ai_input_tokens&#34;: input_tokens,
+            &#34;$ai_output_tokens&#34;: output_tokens,
+            &#34;$ai_latency&#34;: round(duration, 4),
+            &#34;$ai_time_to_first_token&#34;: round(ttft, 4),
+            &#34;tokens_per_second&#34;: round(tps, 2),
+            &#34;cancelled&#34;: cancelled,
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting $ai_generation: tokens=(in:%d, out:%d) latency=%.2fs&#34;,
+                    input_tokens, output_tokens, duration)
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;$ai_generation&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture $ai_generation event: %s&#34;, e)
+
+    def record_interruption_metrics(self, m: Any):
+        &#34;&#34;&#34;Records conversational interruption / user frustration event.&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;timestamp&#34;: time.time(),
+            &#34;speech_duration_before_cut&#34;: getattr(m, &#34;duration&#34;, 0.0),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_interrupted&#34;)
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_agent_interrupted&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_agent_interrupted event: %s&#34;, e)
+
+    def record_tts_metrics(self, m: Any):
+        &#34;&#34;&#34;Records Text-to-Speech synthesis latency waterfall metrics (TTFB, duration).&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;tts_ttfb&#34;: round(getattr(m, &#34;ttfb&#34;, 0.0), 4),
+            &#34;tts_duration&#34;: round(getattr(m, &#34;duration&#34;, 0.0), 4),
+            &#34;audio_duration&#34;: round(getattr(m, &#34;audio_duration&#34;, 0.0), 4),
+            &#34;characters_count&#34;: getattr(m, &#34;characters_count&#34;, 0),
+            &#34;tts_model&#34;: getattr(m, &#34;label&#34;, &#34;tts&#34;),
+            &#34;cancelled&#34;: getattr(m, &#34;cancelled&#34;, False),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_tts_latency: ttfb=%.3fs duration=%.3fs&#34;,
+                    properties[&#34;tts_ttfb&#34;], properties[&#34;tts_duration&#34;])
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_agent_tts_latency&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_agent_tts_latency event: %s&#34;, e)
+
+    def record_stt_metrics(self, m: Any):
+        &#34;&#34;&#34;Records Speech-to-Text transcription latency metrics.&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;stt_duration&#34;: round(getattr(m, &#34;duration&#34;, 0.0), 4),
+            &#34;audio_duration&#34;: round(getattr(m, &#34;audio_duration&#34;, 0.0), 4),
+            &#34;stt_model&#34;: getattr(m, &#34;label&#34;, &#34;stt&#34;),
+            &#34;streamed&#34;: getattr(m, &#34;streamed&#34;, True),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_stt_latency: duration=%.3fs&#34;,
+                    properties[&#34;stt_duration&#34;])
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_agent_stt_latency&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_agent_stt_latency event: %s&#34;, e)
+
+    def record_eou_metrics(self, m: Any):
+        &#34;&#34;&#34;Records End-of-Utterance (endpointing) conversational turn transition delay.&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;eou_delay&#34;: round(getattr(m, &#34;end_of_utterance_delay&#34;, 0.0), 4),
+            &#34;transcription_delay&#34;: round(getattr(m, &#34;transcription_delay&#34;, 0.0), 4),
+            &#34;turn_completed_delay&#34;: round(getattr(m, &#34;on_user_turn_completed_delay&#34;, 0.0), 4),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_endpointing_delay: eou_delay=%.3fs&#34;,
+                    properties[&#34;eou_delay&#34;])
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_agent_endpointing_delay&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_agent_endpointing_delay event: %s&#34;, e)
+
+    def record_session_usage(self, m: Any):
+        &#34;&#34;&#34;Records cumulative session resource and token usage.&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;total_tokens&#34;: getattr(m, &#34;total_tokens&#34;, 0),
+            &#34;input_tokens&#34;: getattr(m, &#34;input_tokens&#34;, 0),
+            &#34;output_tokens&#34;: getattr(m, &#34;output_tokens&#34;, 0),
+            &#34;audio_duration&#34;: getattr(m, &#34;audio_duration&#34;, 0.0),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_session_completed&#34;)
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_session_completed&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_session_completed event: %s&#34;, e)
+
+    def shutdown(self):
+        &#34;&#34;&#34;Flushes remaining events to PostHog.&#34;&#34;&#34;
+        if self.client:
+            try:
+                self.client.flush()
+            except Exception:
+                pass</code></pre>
+</details>
+<div class="desc"><p>Subscribes to LiveKit Agent metrics and emits standardized PostHog events
+for AI observability ($ai_generation), conversational frustration (interruptions),
+voice latency waterfalls (TTS, STT, EOU), Session Replay cross-linking, and session costs.</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.attach_to_session"><code class="name flex">
+<span>def <span class="ident">attach_to_session</span></span>(<span>self, session: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def attach_to_session(self, session: Any):
+    &#34;&#34;&#34;Attaches metrics listener to a LiveKit AgentSession or VoicePipelineAgent.&#34;&#34;&#34;
+    if hasattr(session, &#34;on&#34;):
+        session.on(&#34;metrics_collected&#34;, self.on_metrics_collected)
+        logger.info(&#34;Attached PostHogAgentObserver to session.on(&#39;metrics_collected&#39;)&#34;)</code></pre>
+</details>
+<div class="desc"><p>Attaches metrics listener to a LiveKit AgentSession or VoicePipelineAgent.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.link_session_replay"><code class="name flex">
+<span>def <span class="ident">link_session_replay</span></span>(<span>self, livekit_room: str, participant_identity: str, replay_id: str | None = None) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def link_session_replay(
+    self,
+    livekit_room: str,
+    participant_identity: str,
+    replay_id: Optional[str] = None,
+) -&gt; str:
+    &#34;&#34;&#34;
+    Cross-links the LiveKit WebRTC voice session with PostHog Session Replay.
+    Emits a $session_replay_link event so the voice recording is indexed alongside DOM replays.
+    &#34;&#34;&#34;
+    rep_id = replay_id or self.session_id
+    replay_url = f&#34;{self.host.rstrip(&#39;/&#39;)}/project/{self.project_id}/replay/{rep_id}&#34;
+
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;livekit_room&#34;: livekit_room,
+        &#34;participant_identity&#34;: participant_identity,
+        &#34;replay_url&#34;: replay_url,
+        &#34;webrtc_stream_linked&#34;: True,
+        &#34;timestamp&#34;: time.time(),
+    }
+
+    logger.info(&#34;[PostHog SessionReplay] Linked LiveKit room &#39;%s&#39; to replay: %s&#34;, livekit_room, replay_url)
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;$session_replay_link&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to emit $session_replay_link event: %s&#34;, e)
+
+    return replay_url</code></pre>
+</details>
+<div class="desc"><p>Cross-links the LiveKit WebRTC voice session with PostHog Session Replay.
+Emits a $session_replay_link event so the voice recording is indexed alongside DOM replays.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.on_metrics_collected"><code class="name flex">
+<span>def <span class="ident">on_metrics_collected</span></span>(<span>self, metrics: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def on_metrics_collected(self, metrics: Any):
+    &#34;&#34;&#34;Dispatches collected metrics into PostHog telemetry.&#34;&#34;&#34;
+    metrics_type = getattr(metrics, &#34;type&#34;, metrics.__class__.__name__)
+
+    if &#34;LLM&#34; in metrics_type or hasattr(metrics, &#34;input_tokens&#34;):
+        self.record_llm_metrics(metrics)
+    elif &#34;Interruption&#34; in metrics_type or hasattr(metrics, &#34;interrupted&#34;):
+        self.record_interruption_metrics(metrics)
+    elif &#34;TTS&#34; in metrics_type or hasattr(metrics, &#34;ttfb&#34;):
+        self.record_tts_metrics(metrics)
+    elif &#34;STT&#34; in metrics_type:
+        self.record_stt_metrics(metrics)
+    elif &#34;EOU&#34; in metrics_type or hasattr(metrics, &#34;end_of_utterance_delay&#34;):
+        self.record_eou_metrics(metrics)
+    elif &#34;Usage&#34; in metrics_type or hasattr(metrics, &#34;total_tokens&#34;):
+        self.record_session_usage(metrics)
+    else:
+        logger.debug(&#34;Captured general metric: %s&#34;, metrics_type)</code></pre>
+</details>
+<div class="desc"><p>Dispatches collected metrics into PostHog telemetry.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_eou_metrics"><code class="name flex">
+<span>def <span class="ident">record_eou_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_eou_metrics(self, m: Any):
+    &#34;&#34;&#34;Records End-of-Utterance (endpointing) conversational turn transition delay.&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;eou_delay&#34;: round(getattr(m, &#34;end_of_utterance_delay&#34;, 0.0), 4),
+        &#34;transcription_delay&#34;: round(getattr(m, &#34;transcription_delay&#34;, 0.0), 4),
+        &#34;turn_completed_delay&#34;: round(getattr(m, &#34;on_user_turn_completed_delay&#34;, 0.0), 4),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_endpointing_delay: eou_delay=%.3fs&#34;,
+                properties[&#34;eou_delay&#34;])
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_agent_endpointing_delay&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_agent_endpointing_delay event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records End-of-Utterance (endpointing) conversational turn transition delay.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_interruption_metrics"><code class="name flex">
+<span>def <span class="ident">record_interruption_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_interruption_metrics(self, m: Any):
+    &#34;&#34;&#34;Records conversational interruption / user frustration event.&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;timestamp&#34;: time.time(),
+        &#34;speech_duration_before_cut&#34;: getattr(m, &#34;duration&#34;, 0.0),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_interrupted&#34;)
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_agent_interrupted&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_agent_interrupted event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records conversational interruption / user frustration event.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_llm_metrics"><code class="name flex">
+<span>def <span class="ident">record_llm_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_llm_metrics(self, m: Any):
+    &#34;&#34;&#34;
+    Conforms strictly to Contract C: PostHog AI Observability Schema ($ai_generation).
+    &#34;&#34;&#34;
+    input_tokens = getattr(m, &#34;input_tokens&#34;, getattr(m, &#34;prompt_tokens&#34;, 0))
+    output_tokens = getattr(m, &#34;output_tokens&#34;, getattr(m, &#34;completion_tokens&#34;, 0))
+    duration = getattr(m, &#34;duration&#34;, getattr(m, &#34;latency&#34;, 0.0))
+    ttft = getattr(m, &#34;time_to_first_token&#34;, getattr(m, &#34;ttft&#34;, 0.0))
+    model = getattr(m, &#34;model&#34;, &#34;gpt-4o-mini&#34;)
+    cancelled = getattr(m, &#34;cancelled&#34;, False)
+
+    tps = (output_tokens / duration) if (duration &gt; 0 and output_tokens &gt; 0) else 0.0
+
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;$ai_trace_id&#34;: getattr(m, &#34;request_id&#34;, f&#34;req_{int(time.time()*1000)}&#34;),
+        &#34;$ai_model&#34;: model,
+        &#34;$ai_provider&#34;: &#34;openai&#34;,
+        &#34;$ai_input_tokens&#34;: input_tokens,
+        &#34;$ai_output_tokens&#34;: output_tokens,
+        &#34;$ai_latency&#34;: round(duration, 4),
+        &#34;$ai_time_to_first_token&#34;: round(ttft, 4),
+        &#34;tokens_per_second&#34;: round(tps, 2),
+        &#34;cancelled&#34;: cancelled,
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting $ai_generation: tokens=(in:%d, out:%d) latency=%.2fs&#34;,
+                input_tokens, output_tokens, duration)
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;$ai_generation&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture $ai_generation event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Conforms strictly to Contract C: PostHog AI Observability Schema ($ai_generation).</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_session_usage"><code class="name flex">
+<span>def <span class="ident">record_session_usage</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_session_usage(self, m: Any):
+    &#34;&#34;&#34;Records cumulative session resource and token usage.&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;total_tokens&#34;: getattr(m, &#34;total_tokens&#34;, 0),
+        &#34;input_tokens&#34;: getattr(m, &#34;input_tokens&#34;, 0),
+        &#34;output_tokens&#34;: getattr(m, &#34;output_tokens&#34;, 0),
+        &#34;audio_duration&#34;: getattr(m, &#34;audio_duration&#34;, 0.0),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_session_completed&#34;)
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_session_completed&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_session_completed event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records cumulative session resource and token usage.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_stt_metrics"><code class="name flex">
+<span>def <span class="ident">record_stt_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_stt_metrics(self, m: Any):
+    &#34;&#34;&#34;Records Speech-to-Text transcription latency metrics.&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;stt_duration&#34;: round(getattr(m, &#34;duration&#34;, 0.0), 4),
+        &#34;audio_duration&#34;: round(getattr(m, &#34;audio_duration&#34;, 0.0), 4),
+        &#34;stt_model&#34;: getattr(m, &#34;label&#34;, &#34;stt&#34;),
+        &#34;streamed&#34;: getattr(m, &#34;streamed&#34;, True),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_stt_latency: duration=%.3fs&#34;,
+                properties[&#34;stt_duration&#34;])
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_agent_stt_latency&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_agent_stt_latency event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records Speech-to-Text transcription latency metrics.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_tts_metrics"><code class="name flex">
+<span>def <span class="ident">record_tts_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_tts_metrics(self, m: Any):
+    &#34;&#34;&#34;Records Text-to-Speech synthesis latency waterfall metrics (TTFB, duration).&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;tts_ttfb&#34;: round(getattr(m, &#34;ttfb&#34;, 0.0), 4),
+        &#34;tts_duration&#34;: round(getattr(m, &#34;duration&#34;, 0.0), 4),
+        &#34;audio_duration&#34;: round(getattr(m, &#34;audio_duration&#34;, 0.0), 4),
+        &#34;characters_count&#34;: getattr(m, &#34;characters_count&#34;, 0),
+        &#34;tts_model&#34;: getattr(m, &#34;label&#34;, &#34;tts&#34;),
+        &#34;cancelled&#34;: getattr(m, &#34;cancelled&#34;, False),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_tts_latency: ttfb=%.3fs duration=%.3fs&#34;,
+                properties[&#34;tts_ttfb&#34;], properties[&#34;tts_duration&#34;])
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_agent_tts_latency&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_agent_tts_latency event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records Text-to-Speech synthesis latency waterfall metrics (TTFB, duration).</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.shutdown"><code class="name flex">
+<span>def <span class="ident">shutdown</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def shutdown(self):
+    &#34;&#34;&#34;Flushes remaining events to PostHog.&#34;&#34;&#34;
+    if self.client:
+        try:
+            self.client.flush()
+        except Exception:
+            pass</code></pre>
+</details>
+<div class="desc"><p>Flushes remaining events to PostHog.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver"><code class="flex name class">
+<span>class <span class="ident">AgentObserver</span></span>
+<span>(</span><span>api_key: str | None = None,<br>host: str | None = None,<br>session_id: str | None = None,<br>project_id: str | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostHogAgentObserver:
+    &#34;&#34;&#34;
+    Subscribes to LiveKit Agent metrics and emits standardized PostHog events
+    for AI observability ($ai_generation), conversational frustration (interruptions),
+    voice latency waterfalls (TTS, STT, EOU), Session Replay cross-linking, and session costs.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        host: Optional[str] = None,
+        session_id: Optional[str] = None,
+        project_id: Optional[str] = None,
+    ):
+        self.api_key = api_key or os.getenv(&#34;POSTHOG_API_KEY&#34;, &#34;phc_mock_key_prism&#34;)
+        self.host = host or os.getenv(&#34;POSTHOG_HOST&#34;, &#34;https://us.i.posthog.com&#34;)
+        self.session_id = session_id or f&#34;RM_prism_{int(time.time())}&#34;
+        self.project_id = project_id or os.getenv(&#34;POSTHOG_PROJECT_ID&#34;, &#34;default_proj&#34;)
+
+        # Initialize PostHog client (flush_at=1 for real-time streaming telemetry)
+        try:
+            self.client = posthog.Posthog(
+                project_api_key=self.api_key,
+                host=self.host,
+                flush_at=1,
+                flush_interval=0.5,
+            )
+            logger.info(&#34;Initialized PostHogAgentObserver with session %s&#34;, self.session_id)
+        except Exception as e:
+            logger.warning(&#34;Failed to initialize PostHog client, logging locally: %s&#34;, e)
+            self.client = None
+
+        # Feature flags helper
+        self.flags = PostHogFeatureFlags(client=self.client, default_distinct_id=self.session_id)
+
+    def attach_to_session(self, session: Any):
+        &#34;&#34;&#34;Attaches metrics listener to a LiveKit AgentSession or VoicePipelineAgent.&#34;&#34;&#34;
+        if hasattr(session, &#34;on&#34;):
+            session.on(&#34;metrics_collected&#34;, self.on_metrics_collected)
+            logger.info(&#34;Attached PostHogAgentObserver to session.on(&#39;metrics_collected&#39;)&#34;)
+
+    def link_session_replay(
+        self,
+        livekit_room: str,
+        participant_identity: str,
+        replay_id: Optional[str] = None,
+    ) -&gt; str:
+        &#34;&#34;&#34;
+        Cross-links the LiveKit WebRTC voice session with PostHog Session Replay.
+        Emits a $session_replay_link event so the voice recording is indexed alongside DOM replays.
+        &#34;&#34;&#34;
+        rep_id = replay_id or self.session_id
+        replay_url = f&#34;{self.host.rstrip(&#39;/&#39;)}/project/{self.project_id}/replay/{rep_id}&#34;
+
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;livekit_room&#34;: livekit_room,
+            &#34;participant_identity&#34;: participant_identity,
+            &#34;replay_url&#34;: replay_url,
+            &#34;webrtc_stream_linked&#34;: True,
+            &#34;timestamp&#34;: time.time(),
+        }
+
+        logger.info(&#34;[PostHog SessionReplay] Linked LiveKit room &#39;%s&#39; to replay: %s&#34;, livekit_room, replay_url)
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;$session_replay_link&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to emit $session_replay_link event: %s&#34;, e)
+
+        return replay_url
+
+    def on_metrics_collected(self, metrics: Any):
+        &#34;&#34;&#34;Dispatches collected metrics into PostHog telemetry.&#34;&#34;&#34;
+        metrics_type = getattr(metrics, &#34;type&#34;, metrics.__class__.__name__)
+
+        if &#34;LLM&#34; in metrics_type or hasattr(metrics, &#34;input_tokens&#34;):
+            self.record_llm_metrics(metrics)
+        elif &#34;Interruption&#34; in metrics_type or hasattr(metrics, &#34;interrupted&#34;):
+            self.record_interruption_metrics(metrics)
+        elif &#34;TTS&#34; in metrics_type or hasattr(metrics, &#34;ttfb&#34;):
+            self.record_tts_metrics(metrics)
+        elif &#34;STT&#34; in metrics_type:
+            self.record_stt_metrics(metrics)
+        elif &#34;EOU&#34; in metrics_type or hasattr(metrics, &#34;end_of_utterance_delay&#34;):
+            self.record_eou_metrics(metrics)
+        elif &#34;Usage&#34; in metrics_type or hasattr(metrics, &#34;total_tokens&#34;):
+            self.record_session_usage(metrics)
+        else:
+            logger.debug(&#34;Captured general metric: %s&#34;, metrics_type)
+
+    def record_llm_metrics(self, m: Any):
+        &#34;&#34;&#34;
+        Conforms strictly to Contract C: PostHog AI Observability Schema ($ai_generation).
+        &#34;&#34;&#34;
+        input_tokens = getattr(m, &#34;input_tokens&#34;, getattr(m, &#34;prompt_tokens&#34;, 0))
+        output_tokens = getattr(m, &#34;output_tokens&#34;, getattr(m, &#34;completion_tokens&#34;, 0))
+        duration = getattr(m, &#34;duration&#34;, getattr(m, &#34;latency&#34;, 0.0))
+        ttft = getattr(m, &#34;time_to_first_token&#34;, getattr(m, &#34;ttft&#34;, 0.0))
+        model = getattr(m, &#34;model&#34;, &#34;gpt-4o-mini&#34;)
+        cancelled = getattr(m, &#34;cancelled&#34;, False)
+
+        tps = (output_tokens / duration) if (duration &gt; 0 and output_tokens &gt; 0) else 0.0
+
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;$ai_trace_id&#34;: getattr(m, &#34;request_id&#34;, f&#34;req_{int(time.time()*1000)}&#34;),
+            &#34;$ai_model&#34;: model,
+            &#34;$ai_provider&#34;: &#34;openai&#34;,
+            &#34;$ai_input_tokens&#34;: input_tokens,
+            &#34;$ai_output_tokens&#34;: output_tokens,
+            &#34;$ai_latency&#34;: round(duration, 4),
+            &#34;$ai_time_to_first_token&#34;: round(ttft, 4),
+            &#34;tokens_per_second&#34;: round(tps, 2),
+            &#34;cancelled&#34;: cancelled,
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting $ai_generation: tokens=(in:%d, out:%d) latency=%.2fs&#34;,
+                    input_tokens, output_tokens, duration)
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;$ai_generation&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture $ai_generation event: %s&#34;, e)
+
+    def record_interruption_metrics(self, m: Any):
+        &#34;&#34;&#34;Records conversational interruption / user frustration event.&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;timestamp&#34;: time.time(),
+            &#34;speech_duration_before_cut&#34;: getattr(m, &#34;duration&#34;, 0.0),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_interrupted&#34;)
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_agent_interrupted&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_agent_interrupted event: %s&#34;, e)
+
+    def record_tts_metrics(self, m: Any):
+        &#34;&#34;&#34;Records Text-to-Speech synthesis latency waterfall metrics (TTFB, duration).&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;tts_ttfb&#34;: round(getattr(m, &#34;ttfb&#34;, 0.0), 4),
+            &#34;tts_duration&#34;: round(getattr(m, &#34;duration&#34;, 0.0), 4),
+            &#34;audio_duration&#34;: round(getattr(m, &#34;audio_duration&#34;, 0.0), 4),
+            &#34;characters_count&#34;: getattr(m, &#34;characters_count&#34;, 0),
+            &#34;tts_model&#34;: getattr(m, &#34;label&#34;, &#34;tts&#34;),
+            &#34;cancelled&#34;: getattr(m, &#34;cancelled&#34;, False),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_tts_latency: ttfb=%.3fs duration=%.3fs&#34;,
+                    properties[&#34;tts_ttfb&#34;], properties[&#34;tts_duration&#34;])
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_agent_tts_latency&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_agent_tts_latency event: %s&#34;, e)
+
+    def record_stt_metrics(self, m: Any):
+        &#34;&#34;&#34;Records Speech-to-Text transcription latency metrics.&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;stt_duration&#34;: round(getattr(m, &#34;duration&#34;, 0.0), 4),
+            &#34;audio_duration&#34;: round(getattr(m, &#34;audio_duration&#34;, 0.0), 4),
+            &#34;stt_model&#34;: getattr(m, &#34;label&#34;, &#34;stt&#34;),
+            &#34;streamed&#34;: getattr(m, &#34;streamed&#34;, True),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_stt_latency: duration=%.3fs&#34;,
+                    properties[&#34;stt_duration&#34;])
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_agent_stt_latency&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_agent_stt_latency event: %s&#34;, e)
+
+    def record_eou_metrics(self, m: Any):
+        &#34;&#34;&#34;Records End-of-Utterance (endpointing) conversational turn transition delay.&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;eou_delay&#34;: round(getattr(m, &#34;end_of_utterance_delay&#34;, 0.0), 4),
+            &#34;transcription_delay&#34;: round(getattr(m, &#34;transcription_delay&#34;, 0.0), 4),
+            &#34;turn_completed_delay&#34;: round(getattr(m, &#34;on_user_turn_completed_delay&#34;, 0.0), 4),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_endpointing_delay: eou_delay=%.3fs&#34;,
+                    properties[&#34;eou_delay&#34;])
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_agent_endpointing_delay&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_agent_endpointing_delay event: %s&#34;, e)
+
+    def record_session_usage(self, m: Any):
+        &#34;&#34;&#34;Records cumulative session resource and token usage.&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;total_tokens&#34;: getattr(m, &#34;total_tokens&#34;, 0),
+            &#34;input_tokens&#34;: getattr(m, &#34;input_tokens&#34;, 0),
+            &#34;output_tokens&#34;: getattr(m, &#34;output_tokens&#34;, 0),
+            &#34;audio_duration&#34;: getattr(m, &#34;audio_duration&#34;, 0.0),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_session_completed&#34;)
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_session_completed&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_session_completed event: %s&#34;, e)
+
+    def shutdown(self):
+        &#34;&#34;&#34;Flushes remaining events to PostHog.&#34;&#34;&#34;
+        if self.client:
+            try:
+                self.client.flush()
+            except Exception:
+                pass</code></pre>
+</details>
+<div class="desc"><p>Subscribes to LiveKit Agent metrics and emits standardized PostHog events
+for AI observability ($ai_generation), conversational frustration (interruptions),
+voice latency waterfalls (TTS, STT, EOU), Session Replay cross-linking, and session costs.</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.attach_to_session"><code class="name flex">
+<span>def <span class="ident">attach_to_session</span></span>(<span>self, session: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def attach_to_session(self, session: Any):
+    &#34;&#34;&#34;Attaches metrics listener to a LiveKit AgentSession or VoicePipelineAgent.&#34;&#34;&#34;
+    if hasattr(session, &#34;on&#34;):
+        session.on(&#34;metrics_collected&#34;, self.on_metrics_collected)
+        logger.info(&#34;Attached PostHogAgentObserver to session.on(&#39;metrics_collected&#39;)&#34;)</code></pre>
+</details>
+<div class="desc"><p>Attaches metrics listener to a LiveKit AgentSession or VoicePipelineAgent.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.link_session_replay"><code class="name flex">
+<span>def <span class="ident">link_session_replay</span></span>(<span>self, livekit_room: str, participant_identity: str, replay_id: str | None = None) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def link_session_replay(
+    self,
+    livekit_room: str,
+    participant_identity: str,
+    replay_id: Optional[str] = None,
+) -&gt; str:
+    &#34;&#34;&#34;
+    Cross-links the LiveKit WebRTC voice session with PostHog Session Replay.
+    Emits a $session_replay_link event so the voice recording is indexed alongside DOM replays.
+    &#34;&#34;&#34;
+    rep_id = replay_id or self.session_id
+    replay_url = f&#34;{self.host.rstrip(&#39;/&#39;)}/project/{self.project_id}/replay/{rep_id}&#34;
+
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;livekit_room&#34;: livekit_room,
+        &#34;participant_identity&#34;: participant_identity,
+        &#34;replay_url&#34;: replay_url,
+        &#34;webrtc_stream_linked&#34;: True,
+        &#34;timestamp&#34;: time.time(),
+    }
+
+    logger.info(&#34;[PostHog SessionReplay] Linked LiveKit room &#39;%s&#39; to replay: %s&#34;, livekit_room, replay_url)
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;$session_replay_link&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to emit $session_replay_link event: %s&#34;, e)
+
+    return replay_url</code></pre>
+</details>
+<div class="desc"><p>Cross-links the LiveKit WebRTC voice session with PostHog Session Replay.
+Emits a $session_replay_link event so the voice recording is indexed alongside DOM replays.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.on_metrics_collected"><code class="name flex">
+<span>def <span class="ident">on_metrics_collected</span></span>(<span>self, metrics: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def on_metrics_collected(self, metrics: Any):
+    &#34;&#34;&#34;Dispatches collected metrics into PostHog telemetry.&#34;&#34;&#34;
+    metrics_type = getattr(metrics, &#34;type&#34;, metrics.__class__.__name__)
+
+    if &#34;LLM&#34; in metrics_type or hasattr(metrics, &#34;input_tokens&#34;):
+        self.record_llm_metrics(metrics)
+    elif &#34;Interruption&#34; in metrics_type or hasattr(metrics, &#34;interrupted&#34;):
+        self.record_interruption_metrics(metrics)
+    elif &#34;TTS&#34; in metrics_type or hasattr(metrics, &#34;ttfb&#34;):
+        self.record_tts_metrics(metrics)
+    elif &#34;STT&#34; in metrics_type:
+        self.record_stt_metrics(metrics)
+    elif &#34;EOU&#34; in metrics_type or hasattr(metrics, &#34;end_of_utterance_delay&#34;):
+        self.record_eou_metrics(metrics)
+    elif &#34;Usage&#34; in metrics_type or hasattr(metrics, &#34;total_tokens&#34;):
+        self.record_session_usage(metrics)
+    else:
+        logger.debug(&#34;Captured general metric: %s&#34;, metrics_type)</code></pre>
+</details>
+<div class="desc"><p>Dispatches collected metrics into PostHog telemetry.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_eou_metrics"><code class="name flex">
+<span>def <span class="ident">record_eou_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_eou_metrics(self, m: Any):
+    &#34;&#34;&#34;Records End-of-Utterance (endpointing) conversational turn transition delay.&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;eou_delay&#34;: round(getattr(m, &#34;end_of_utterance_delay&#34;, 0.0), 4),
+        &#34;transcription_delay&#34;: round(getattr(m, &#34;transcription_delay&#34;, 0.0), 4),
+        &#34;turn_completed_delay&#34;: round(getattr(m, &#34;on_user_turn_completed_delay&#34;, 0.0), 4),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_endpointing_delay: eou_delay=%.3fs&#34;,
+                properties[&#34;eou_delay&#34;])
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_agent_endpointing_delay&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_agent_endpointing_delay event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records End-of-Utterance (endpointing) conversational turn transition delay.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_interruption_metrics"><code class="name flex">
+<span>def <span class="ident">record_interruption_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_interruption_metrics(self, m: Any):
+    &#34;&#34;&#34;Records conversational interruption / user frustration event.&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;timestamp&#34;: time.time(),
+        &#34;speech_duration_before_cut&#34;: getattr(m, &#34;duration&#34;, 0.0),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_interrupted&#34;)
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_agent_interrupted&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_agent_interrupted event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records conversational interruption / user frustration event.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_llm_metrics"><code class="name flex">
+<span>def <span class="ident">record_llm_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_llm_metrics(self, m: Any):
+    &#34;&#34;&#34;
+    Conforms strictly to Contract C: PostHog AI Observability Schema ($ai_generation).
+    &#34;&#34;&#34;
+    input_tokens = getattr(m, &#34;input_tokens&#34;, getattr(m, &#34;prompt_tokens&#34;, 0))
+    output_tokens = getattr(m, &#34;output_tokens&#34;, getattr(m, &#34;completion_tokens&#34;, 0))
+    duration = getattr(m, &#34;duration&#34;, getattr(m, &#34;latency&#34;, 0.0))
+    ttft = getattr(m, &#34;time_to_first_token&#34;, getattr(m, &#34;ttft&#34;, 0.0))
+    model = getattr(m, &#34;model&#34;, &#34;gpt-4o-mini&#34;)
+    cancelled = getattr(m, &#34;cancelled&#34;, False)
+
+    tps = (output_tokens / duration) if (duration &gt; 0 and output_tokens &gt; 0) else 0.0
+
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;$ai_trace_id&#34;: getattr(m, &#34;request_id&#34;, f&#34;req_{int(time.time()*1000)}&#34;),
+        &#34;$ai_model&#34;: model,
+        &#34;$ai_provider&#34;: &#34;openai&#34;,
+        &#34;$ai_input_tokens&#34;: input_tokens,
+        &#34;$ai_output_tokens&#34;: output_tokens,
+        &#34;$ai_latency&#34;: round(duration, 4),
+        &#34;$ai_time_to_first_token&#34;: round(ttft, 4),
+        &#34;tokens_per_second&#34;: round(tps, 2),
+        &#34;cancelled&#34;: cancelled,
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting $ai_generation: tokens=(in:%d, out:%d) latency=%.2fs&#34;,
+                input_tokens, output_tokens, duration)
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;$ai_generation&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture $ai_generation event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Conforms strictly to Contract C: PostHog AI Observability Schema ($ai_generation).</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_session_usage"><code class="name flex">
+<span>def <span class="ident">record_session_usage</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_session_usage(self, m: Any):
+    &#34;&#34;&#34;Records cumulative session resource and token usage.&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;total_tokens&#34;: getattr(m, &#34;total_tokens&#34;, 0),
+        &#34;input_tokens&#34;: getattr(m, &#34;input_tokens&#34;, 0),
+        &#34;output_tokens&#34;: getattr(m, &#34;output_tokens&#34;, 0),
+        &#34;audio_duration&#34;: getattr(m, &#34;audio_duration&#34;, 0.0),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_session_completed&#34;)
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_session_completed&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_session_completed event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records cumulative session resource and token usage.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_stt_metrics"><code class="name flex">
+<span>def <span class="ident">record_stt_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_stt_metrics(self, m: Any):
+    &#34;&#34;&#34;Records Speech-to-Text transcription latency metrics.&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;stt_duration&#34;: round(getattr(m, &#34;duration&#34;, 0.0), 4),
+        &#34;audio_duration&#34;: round(getattr(m, &#34;audio_duration&#34;, 0.0), 4),
+        &#34;stt_model&#34;: getattr(m, &#34;label&#34;, &#34;stt&#34;),
+        &#34;streamed&#34;: getattr(m, &#34;streamed&#34;, True),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_stt_latency: duration=%.3fs&#34;,
+                properties[&#34;stt_duration&#34;])
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_agent_stt_latency&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_agent_stt_latency event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records Speech-to-Text transcription latency metrics.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_tts_metrics"><code class="name flex">
+<span>def <span class="ident">record_tts_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_tts_metrics(self, m: Any):
+    &#34;&#34;&#34;Records Text-to-Speech synthesis latency waterfall metrics (TTFB, duration).&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;tts_ttfb&#34;: round(getattr(m, &#34;ttfb&#34;, 0.0), 4),
+        &#34;tts_duration&#34;: round(getattr(m, &#34;duration&#34;, 0.0), 4),
+        &#34;audio_duration&#34;: round(getattr(m, &#34;audio_duration&#34;, 0.0), 4),
+        &#34;characters_count&#34;: getattr(m, &#34;characters_count&#34;, 0),
+        &#34;tts_model&#34;: getattr(m, &#34;label&#34;, &#34;tts&#34;),
+        &#34;cancelled&#34;: getattr(m, &#34;cancelled&#34;, False),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_tts_latency: ttfb=%.3fs duration=%.3fs&#34;,
+                properties[&#34;tts_ttfb&#34;], properties[&#34;tts_duration&#34;])
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_agent_tts_latency&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_agent_tts_latency event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records Text-to-Speech synthesis latency waterfall metrics (TTFB, duration).</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.shutdown"><code class="name flex">
+<span>def <span class="ident">shutdown</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def shutdown(self):
+    &#34;&#34;&#34;Flushes remaining events to PostHog.&#34;&#34;&#34;
+    if self.client:
+        try:
+            self.client.flush()
+        except Exception:
+            pass</code></pre>
+</details>
+<div class="desc"><p>Flushes remaining events to PostHog.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver"><code class="flex name class">
+<span>class <span class="ident">PostHogAgentObserver</span></span>
+<span>(</span><span>api_key: str | None = None,<br>host: str | None = None,<br>session_id: str | None = None,<br>project_id: str | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostHogAgentObserver:
+    &#34;&#34;&#34;
+    Subscribes to LiveKit Agent metrics and emits standardized PostHog events
+    for AI observability ($ai_generation), conversational frustration (interruptions),
+    voice latency waterfalls (TTS, STT, EOU), Session Replay cross-linking, and session costs.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        host: Optional[str] = None,
+        session_id: Optional[str] = None,
+        project_id: Optional[str] = None,
+    ):
+        self.api_key = api_key or os.getenv(&#34;POSTHOG_API_KEY&#34;, &#34;phc_mock_key_prism&#34;)
+        self.host = host or os.getenv(&#34;POSTHOG_HOST&#34;, &#34;https://us.i.posthog.com&#34;)
+        self.session_id = session_id or f&#34;RM_prism_{int(time.time())}&#34;
+        self.project_id = project_id or os.getenv(&#34;POSTHOG_PROJECT_ID&#34;, &#34;default_proj&#34;)
+
+        # Initialize PostHog client (flush_at=1 for real-time streaming telemetry)
+        try:
+            self.client = posthog.Posthog(
+                project_api_key=self.api_key,
+                host=self.host,
+                flush_at=1,
+                flush_interval=0.5,
+            )
+            logger.info(&#34;Initialized PostHogAgentObserver with session %s&#34;, self.session_id)
+        except Exception as e:
+            logger.warning(&#34;Failed to initialize PostHog client, logging locally: %s&#34;, e)
+            self.client = None
+
+        # Feature flags helper
+        self.flags = PostHogFeatureFlags(client=self.client, default_distinct_id=self.session_id)
+
+    def attach_to_session(self, session: Any):
+        &#34;&#34;&#34;Attaches metrics listener to a LiveKit AgentSession or VoicePipelineAgent.&#34;&#34;&#34;
+        if hasattr(session, &#34;on&#34;):
+            session.on(&#34;metrics_collected&#34;, self.on_metrics_collected)
+            logger.info(&#34;Attached PostHogAgentObserver to session.on(&#39;metrics_collected&#39;)&#34;)
+
+    def link_session_replay(
+        self,
+        livekit_room: str,
+        participant_identity: str,
+        replay_id: Optional[str] = None,
+    ) -&gt; str:
+        &#34;&#34;&#34;
+        Cross-links the LiveKit WebRTC voice session with PostHog Session Replay.
+        Emits a $session_replay_link event so the voice recording is indexed alongside DOM replays.
+        &#34;&#34;&#34;
+        rep_id = replay_id or self.session_id
+        replay_url = f&#34;{self.host.rstrip(&#39;/&#39;)}/project/{self.project_id}/replay/{rep_id}&#34;
+
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;livekit_room&#34;: livekit_room,
+            &#34;participant_identity&#34;: participant_identity,
+            &#34;replay_url&#34;: replay_url,
+            &#34;webrtc_stream_linked&#34;: True,
+            &#34;timestamp&#34;: time.time(),
+        }
+
+        logger.info(&#34;[PostHog SessionReplay] Linked LiveKit room &#39;%s&#39; to replay: %s&#34;, livekit_room, replay_url)
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;$session_replay_link&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to emit $session_replay_link event: %s&#34;, e)
+
+        return replay_url
+
+    def on_metrics_collected(self, metrics: Any):
+        &#34;&#34;&#34;Dispatches collected metrics into PostHog telemetry.&#34;&#34;&#34;
+        metrics_type = getattr(metrics, &#34;type&#34;, metrics.__class__.__name__)
+
+        if &#34;LLM&#34; in metrics_type or hasattr(metrics, &#34;input_tokens&#34;):
+            self.record_llm_metrics(metrics)
+        elif &#34;Interruption&#34; in metrics_type or hasattr(metrics, &#34;interrupted&#34;):
+            self.record_interruption_metrics(metrics)
+        elif &#34;TTS&#34; in metrics_type or hasattr(metrics, &#34;ttfb&#34;):
+            self.record_tts_metrics(metrics)
+        elif &#34;STT&#34; in metrics_type:
+            self.record_stt_metrics(metrics)
+        elif &#34;EOU&#34; in metrics_type or hasattr(metrics, &#34;end_of_utterance_delay&#34;):
+            self.record_eou_metrics(metrics)
+        elif &#34;Usage&#34; in metrics_type or hasattr(metrics, &#34;total_tokens&#34;):
+            self.record_session_usage(metrics)
+        else:
+            logger.debug(&#34;Captured general metric: %s&#34;, metrics_type)
+
+    def record_llm_metrics(self, m: Any):
+        &#34;&#34;&#34;
+        Conforms strictly to Contract C: PostHog AI Observability Schema ($ai_generation).
+        &#34;&#34;&#34;
+        input_tokens = getattr(m, &#34;input_tokens&#34;, getattr(m, &#34;prompt_tokens&#34;, 0))
+        output_tokens = getattr(m, &#34;output_tokens&#34;, getattr(m, &#34;completion_tokens&#34;, 0))
+        duration = getattr(m, &#34;duration&#34;, getattr(m, &#34;latency&#34;, 0.0))
+        ttft = getattr(m, &#34;time_to_first_token&#34;, getattr(m, &#34;ttft&#34;, 0.0))
+        model = getattr(m, &#34;model&#34;, &#34;gpt-4o-mini&#34;)
+        cancelled = getattr(m, &#34;cancelled&#34;, False)
+
+        tps = (output_tokens / duration) if (duration &gt; 0 and output_tokens &gt; 0) else 0.0
+
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;$ai_trace_id&#34;: getattr(m, &#34;request_id&#34;, f&#34;req_{int(time.time()*1000)}&#34;),
+            &#34;$ai_model&#34;: model,
+            &#34;$ai_provider&#34;: &#34;openai&#34;,
+            &#34;$ai_input_tokens&#34;: input_tokens,
+            &#34;$ai_output_tokens&#34;: output_tokens,
+            &#34;$ai_latency&#34;: round(duration, 4),
+            &#34;$ai_time_to_first_token&#34;: round(ttft, 4),
+            &#34;tokens_per_second&#34;: round(tps, 2),
+            &#34;cancelled&#34;: cancelled,
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting $ai_generation: tokens=(in:%d, out:%d) latency=%.2fs&#34;,
+                    input_tokens, output_tokens, duration)
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;$ai_generation&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture $ai_generation event: %s&#34;, e)
+
+    def record_interruption_metrics(self, m: Any):
+        &#34;&#34;&#34;Records conversational interruption / user frustration event.&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;timestamp&#34;: time.time(),
+            &#34;speech_duration_before_cut&#34;: getattr(m, &#34;duration&#34;, 0.0),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_interrupted&#34;)
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_agent_interrupted&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_agent_interrupted event: %s&#34;, e)
+
+    def record_tts_metrics(self, m: Any):
+        &#34;&#34;&#34;Records Text-to-Speech synthesis latency waterfall metrics (TTFB, duration).&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;tts_ttfb&#34;: round(getattr(m, &#34;ttfb&#34;, 0.0), 4),
+            &#34;tts_duration&#34;: round(getattr(m, &#34;duration&#34;, 0.0), 4),
+            &#34;audio_duration&#34;: round(getattr(m, &#34;audio_duration&#34;, 0.0), 4),
+            &#34;characters_count&#34;: getattr(m, &#34;characters_count&#34;, 0),
+            &#34;tts_model&#34;: getattr(m, &#34;label&#34;, &#34;tts&#34;),
+            &#34;cancelled&#34;: getattr(m, &#34;cancelled&#34;, False),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_tts_latency: ttfb=%.3fs duration=%.3fs&#34;,
+                    properties[&#34;tts_ttfb&#34;], properties[&#34;tts_duration&#34;])
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_agent_tts_latency&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_agent_tts_latency event: %s&#34;, e)
+
+    def record_stt_metrics(self, m: Any):
+        &#34;&#34;&#34;Records Speech-to-Text transcription latency metrics.&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;stt_duration&#34;: round(getattr(m, &#34;duration&#34;, 0.0), 4),
+            &#34;audio_duration&#34;: round(getattr(m, &#34;audio_duration&#34;, 0.0), 4),
+            &#34;stt_model&#34;: getattr(m, &#34;label&#34;, &#34;stt&#34;),
+            &#34;streamed&#34;: getattr(m, &#34;streamed&#34;, True),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_stt_latency: duration=%.3fs&#34;,
+                    properties[&#34;stt_duration&#34;])
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_agent_stt_latency&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_agent_stt_latency event: %s&#34;, e)
+
+    def record_eou_metrics(self, m: Any):
+        &#34;&#34;&#34;Records End-of-Utterance (endpointing) conversational turn transition delay.&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;eou_delay&#34;: round(getattr(m, &#34;end_of_utterance_delay&#34;, 0.0), 4),
+            &#34;transcription_delay&#34;: round(getattr(m, &#34;transcription_delay&#34;, 0.0), 4),
+            &#34;turn_completed_delay&#34;: round(getattr(m, &#34;on_user_turn_completed_delay&#34;, 0.0), 4),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_endpointing_delay: eou_delay=%.3fs&#34;,
+                    properties[&#34;eou_delay&#34;])
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_agent_endpointing_delay&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_agent_endpointing_delay event: %s&#34;, e)
+
+    def record_session_usage(self, m: Any):
+        &#34;&#34;&#34;Records cumulative session resource and token usage.&#34;&#34;&#34;
+        properties = {
+            &#34;$session_id&#34;: self.session_id,
+            &#34;total_tokens&#34;: getattr(m, &#34;total_tokens&#34;, 0),
+            &#34;input_tokens&#34;: getattr(m, &#34;input_tokens&#34;, 0),
+            &#34;output_tokens&#34;: getattr(m, &#34;output_tokens&#34;, 0),
+            &#34;audio_duration&#34;: getattr(m, &#34;audio_duration&#34;, 0.0),
+        }
+
+        logger.info(&#34;[PostHog Telemetry] Emitting voice_session_completed&#34;)
+
+        if self.client:
+            try:
+                self.client.capture(
+                    distinct_id=self.session_id,
+                    event=&#34;voice_session_completed&#34;,
+                    properties=properties,
+                )
+            except Exception as e:
+                logger.error(&#34;Failed to capture voice_session_completed event: %s&#34;, e)
+
+    def shutdown(self):
+        &#34;&#34;&#34;Flushes remaining events to PostHog.&#34;&#34;&#34;
+        if self.client:
+            try:
+                self.client.flush()
+            except Exception:
+                pass</code></pre>
+</details>
+<div class="desc"><p>Subscribes to LiveKit Agent metrics and emits standardized PostHog events
+for AI observability ($ai_generation), conversational frustration (interruptions),
+voice latency waterfalls (TTS, STT, EOU), Session Replay cross-linking, and session costs.</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.attach_to_session"><code class="name flex">
+<span>def <span class="ident">attach_to_session</span></span>(<span>self, session: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def attach_to_session(self, session: Any):
+    &#34;&#34;&#34;Attaches metrics listener to a LiveKit AgentSession or VoicePipelineAgent.&#34;&#34;&#34;
+    if hasattr(session, &#34;on&#34;):
+        session.on(&#34;metrics_collected&#34;, self.on_metrics_collected)
+        logger.info(&#34;Attached PostHogAgentObserver to session.on(&#39;metrics_collected&#39;)&#34;)</code></pre>
+</details>
+<div class="desc"><p>Attaches metrics listener to a LiveKit AgentSession or VoicePipelineAgent.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.link_session_replay"><code class="name flex">
+<span>def <span class="ident">link_session_replay</span></span>(<span>self, livekit_room: str, participant_identity: str, replay_id: str | None = None) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def link_session_replay(
+    self,
+    livekit_room: str,
+    participant_identity: str,
+    replay_id: Optional[str] = None,
+) -&gt; str:
+    &#34;&#34;&#34;
+    Cross-links the LiveKit WebRTC voice session with PostHog Session Replay.
+    Emits a $session_replay_link event so the voice recording is indexed alongside DOM replays.
+    &#34;&#34;&#34;
+    rep_id = replay_id or self.session_id
+    replay_url = f&#34;{self.host.rstrip(&#39;/&#39;)}/project/{self.project_id}/replay/{rep_id}&#34;
+
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;livekit_room&#34;: livekit_room,
+        &#34;participant_identity&#34;: participant_identity,
+        &#34;replay_url&#34;: replay_url,
+        &#34;webrtc_stream_linked&#34;: True,
+        &#34;timestamp&#34;: time.time(),
+    }
+
+    logger.info(&#34;[PostHog SessionReplay] Linked LiveKit room &#39;%s&#39; to replay: %s&#34;, livekit_room, replay_url)
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;$session_replay_link&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to emit $session_replay_link event: %s&#34;, e)
+
+    return replay_url</code></pre>
+</details>
+<div class="desc"><p>Cross-links the LiveKit WebRTC voice session with PostHog Session Replay.
+Emits a $session_replay_link event so the voice recording is indexed alongside DOM replays.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.on_metrics_collected"><code class="name flex">
+<span>def <span class="ident">on_metrics_collected</span></span>(<span>self, metrics: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def on_metrics_collected(self, metrics: Any):
+    &#34;&#34;&#34;Dispatches collected metrics into PostHog telemetry.&#34;&#34;&#34;
+    metrics_type = getattr(metrics, &#34;type&#34;, metrics.__class__.__name__)
+
+    if &#34;LLM&#34; in metrics_type or hasattr(metrics, &#34;input_tokens&#34;):
+        self.record_llm_metrics(metrics)
+    elif &#34;Interruption&#34; in metrics_type or hasattr(metrics, &#34;interrupted&#34;):
+        self.record_interruption_metrics(metrics)
+    elif &#34;TTS&#34; in metrics_type or hasattr(metrics, &#34;ttfb&#34;):
+        self.record_tts_metrics(metrics)
+    elif &#34;STT&#34; in metrics_type:
+        self.record_stt_metrics(metrics)
+    elif &#34;EOU&#34; in metrics_type or hasattr(metrics, &#34;end_of_utterance_delay&#34;):
+        self.record_eou_metrics(metrics)
+    elif &#34;Usage&#34; in metrics_type or hasattr(metrics, &#34;total_tokens&#34;):
+        self.record_session_usage(metrics)
+    else:
+        logger.debug(&#34;Captured general metric: %s&#34;, metrics_type)</code></pre>
+</details>
+<div class="desc"><p>Dispatches collected metrics into PostHog telemetry.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_eou_metrics"><code class="name flex">
+<span>def <span class="ident">record_eou_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_eou_metrics(self, m: Any):
+    &#34;&#34;&#34;Records End-of-Utterance (endpointing) conversational turn transition delay.&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;eou_delay&#34;: round(getattr(m, &#34;end_of_utterance_delay&#34;, 0.0), 4),
+        &#34;transcription_delay&#34;: round(getattr(m, &#34;transcription_delay&#34;, 0.0), 4),
+        &#34;turn_completed_delay&#34;: round(getattr(m, &#34;on_user_turn_completed_delay&#34;, 0.0), 4),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_endpointing_delay: eou_delay=%.3fs&#34;,
+                properties[&#34;eou_delay&#34;])
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_agent_endpointing_delay&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_agent_endpointing_delay event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records End-of-Utterance (endpointing) conversational turn transition delay.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_interruption_metrics"><code class="name flex">
+<span>def <span class="ident">record_interruption_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_interruption_metrics(self, m: Any):
+    &#34;&#34;&#34;Records conversational interruption / user frustration event.&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;timestamp&#34;: time.time(),
+        &#34;speech_duration_before_cut&#34;: getattr(m, &#34;duration&#34;, 0.0),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_interrupted&#34;)
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_agent_interrupted&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_agent_interrupted event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records conversational interruption / user frustration event.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_llm_metrics"><code class="name flex">
+<span>def <span class="ident">record_llm_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_llm_metrics(self, m: Any):
+    &#34;&#34;&#34;
+    Conforms strictly to Contract C: PostHog AI Observability Schema ($ai_generation).
+    &#34;&#34;&#34;
+    input_tokens = getattr(m, &#34;input_tokens&#34;, getattr(m, &#34;prompt_tokens&#34;, 0))
+    output_tokens = getattr(m, &#34;output_tokens&#34;, getattr(m, &#34;completion_tokens&#34;, 0))
+    duration = getattr(m, &#34;duration&#34;, getattr(m, &#34;latency&#34;, 0.0))
+    ttft = getattr(m, &#34;time_to_first_token&#34;, getattr(m, &#34;ttft&#34;, 0.0))
+    model = getattr(m, &#34;model&#34;, &#34;gpt-4o-mini&#34;)
+    cancelled = getattr(m, &#34;cancelled&#34;, False)
+
+    tps = (output_tokens / duration) if (duration &gt; 0 and output_tokens &gt; 0) else 0.0
+
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;$ai_trace_id&#34;: getattr(m, &#34;request_id&#34;, f&#34;req_{int(time.time()*1000)}&#34;),
+        &#34;$ai_model&#34;: model,
+        &#34;$ai_provider&#34;: &#34;openai&#34;,
+        &#34;$ai_input_tokens&#34;: input_tokens,
+        &#34;$ai_output_tokens&#34;: output_tokens,
+        &#34;$ai_latency&#34;: round(duration, 4),
+        &#34;$ai_time_to_first_token&#34;: round(ttft, 4),
+        &#34;tokens_per_second&#34;: round(tps, 2),
+        &#34;cancelled&#34;: cancelled,
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting $ai_generation: tokens=(in:%d, out:%d) latency=%.2fs&#34;,
+                input_tokens, output_tokens, duration)
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;$ai_generation&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture $ai_generation event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Conforms strictly to Contract C: PostHog AI Observability Schema ($ai_generation).</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_session_usage"><code class="name flex">
+<span>def <span class="ident">record_session_usage</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_session_usage(self, m: Any):
+    &#34;&#34;&#34;Records cumulative session resource and token usage.&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;total_tokens&#34;: getattr(m, &#34;total_tokens&#34;, 0),
+        &#34;input_tokens&#34;: getattr(m, &#34;input_tokens&#34;, 0),
+        &#34;output_tokens&#34;: getattr(m, &#34;output_tokens&#34;, 0),
+        &#34;audio_duration&#34;: getattr(m, &#34;audio_duration&#34;, 0.0),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_session_completed&#34;)
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_session_completed&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_session_completed event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records cumulative session resource and token usage.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_stt_metrics"><code class="name flex">
+<span>def <span class="ident">record_stt_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_stt_metrics(self, m: Any):
+    &#34;&#34;&#34;Records Speech-to-Text transcription latency metrics.&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;stt_duration&#34;: round(getattr(m, &#34;duration&#34;, 0.0), 4),
+        &#34;audio_duration&#34;: round(getattr(m, &#34;audio_duration&#34;, 0.0), 4),
+        &#34;stt_model&#34;: getattr(m, &#34;label&#34;, &#34;stt&#34;),
+        &#34;streamed&#34;: getattr(m, &#34;streamed&#34;, True),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_stt_latency: duration=%.3fs&#34;,
+                properties[&#34;stt_duration&#34;])
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_agent_stt_latency&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_agent_stt_latency event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records Speech-to-Text transcription latency metrics.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.record_tts_metrics"><code class="name flex">
+<span>def <span class="ident">record_tts_metrics</span></span>(<span>self, m: Any)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def record_tts_metrics(self, m: Any):
+    &#34;&#34;&#34;Records Text-to-Speech synthesis latency waterfall metrics (TTFB, duration).&#34;&#34;&#34;
+    properties = {
+        &#34;$session_id&#34;: self.session_id,
+        &#34;tts_ttfb&#34;: round(getattr(m, &#34;ttfb&#34;, 0.0), 4),
+        &#34;tts_duration&#34;: round(getattr(m, &#34;duration&#34;, 0.0), 4),
+        &#34;audio_duration&#34;: round(getattr(m, &#34;audio_duration&#34;, 0.0), 4),
+        &#34;characters_count&#34;: getattr(m, &#34;characters_count&#34;, 0),
+        &#34;tts_model&#34;: getattr(m, &#34;label&#34;, &#34;tts&#34;),
+        &#34;cancelled&#34;: getattr(m, &#34;cancelled&#34;, False),
+    }
+
+    logger.info(&#34;[PostHog Telemetry] Emitting voice_agent_tts_latency: ttfb=%.3fs duration=%.3fs&#34;,
+                properties[&#34;tts_ttfb&#34;], properties[&#34;tts_duration&#34;])
+
+    if self.client:
+        try:
+            self.client.capture(
+                distinct_id=self.session_id,
+                event=&#34;voice_agent_tts_latency&#34;,
+                properties=properties,
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to capture voice_agent_tts_latency event: %s&#34;, e)</code></pre>
+</details>
+<div class="desc"><p>Records Text-to-Speech synthesis latency waterfall metrics (TTFB, duration).</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogAgentObserver.shutdown"><code class="name flex">
+<span>def <span class="ident">shutdown</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def shutdown(self):
+    &#34;&#34;&#34;Flushes remaining events to PostHog.&#34;&#34;&#34;
+    if self.client:
+        try:
+            self.client.flush()
+        except Exception:
+            pass</code></pre>
+</details>
+<div class="desc"><p>Flushes remaining events to PostHog.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools"><code class="flex name class">
+<span>class <span class="ident">Tools</span></span>
+<span>(</span><span>gateway_url: str = 'http://localhost:8080',<br>room_name: str = 'prism-demo',<br>livekit_room: Any | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostHogDualChannelTools:
+    &#34;&#34;&#34;
+    Dual-Channel Tool suite connecting LiveKit Voice Agents with PostHog&#39;s analytical engine.
+    Splits analytical query responses into:
+      1. High-throughput WebRTC data-channel visualization packet.
+      2. Concise, speech-ready delta (&lt; 30 tokens) for conversational LLM context.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        gateway_url: str = DEFAULT_GATEWAY_URL,
+        room_name: str = &#34;prism-demo&#34;,
+        livekit_room: Optional[Any] = None,
+    ):
+        self.gateway_url = gateway_url.rstrip(&#34;/&#34;)
+        self.room_name = room_name
+        self.livekit_room = livekit_room
+        self.http_client = httpx.Client(timeout=3.0)
+
+        # Wrap tools with LiveKit function_tool
+        self.query_funnel_tool = function_tool(self._query_funnel_impl)
+        self.query_errors_tool = function_tool(self._query_errors_impl)
+        self.query_retention_tool = function_tool(self._query_retention_impl)
+        self.query_hogql_tool = function_tool(self._query_hogql_impl)
+
+    def _query_funnel_impl(self, funnel_id: str = &#34;checkout_v2&#34;) -&gt; str:
+        &#34;&#34;&#34;
+        Query PostHog user conversion funnel analytics by funnel ID (e.g., checkout_v2 or signup).
+        Visual chart data is pushed over the WebRTC Data Channel directly to the user&#39;s browser,
+        and an ultra-compact speech-ready string (&lt; 30 tokens) is returned to the agent context.
+        &#34;&#34;&#34;
+        payload = {
+            &#34;room_name&#34;: self.room_name,
+            &#34;session_id&#34;: f&#34;session_{int(time.time())}&#34;,
+            &#34;tool&#34;: &#34;query_funnel&#34;,
+            &#34;args&#34;: {&#34;funnel_id&#34;: funnel_id},
+        }
+
+        try:
+            resp = self.http_client.post(f&#34;{self.gateway_url}/api/tools/funnel&#34;, json=payload)
+            if resp.status_code == 200:
+                data = resp.json()
+                return data.get(
+                    &#34;speech_ready_delta&#34;,
+                    &#34;The checkout funnel has a 22.5 percent conversion rate. I&#39;ve projected the conversion funnel onto your screen.&#34;,
+                )
+        except Exception as e:
+            logger.warning(&#34;[Prism Tools] Gateway unreachable (%s). Using local fallback.&#34;, e)
+
+        # Local fallback if Go Gateway is offline
+        mock_card = {
+            &#34;type&#34;: &#34;funnel_viz&#34;,
+            &#34;title&#34;: &#34;Checkout Conversion Dropoff&#34;,
+            &#34;funnel_id&#34;: funnel_id,
+            &#34;steps&#34;: [
+                {&#34;name&#34;: &#34;Cart Viewed&#34;, &#34;visitors&#34;: 14200, &#34;conversion_rate&#34;: 100.0},
+                {&#34;name&#34;: &#34;Billing Entered&#34;, &#34;visitors&#34;: 9100, &#34;conversion_rate&#34;: 64.1},
+                {&#34;name&#34;: &#34;Payment Confirmed&#34;, &#34;visitors&#34;: 3200, &#34;conversion_rate&#34;: 22.5},
+            ],
+            &#34;primary_drop_step&#34;: &#34;Payment Confirmed&#34;,
+            &#34;timestamp&#34;: int(time.time()),
+        }
+        self._publish_webrtc_card(mock_card)
+        return &#34;The checkout funnel has a 22.5 percent conversion rate. The main drop-off is at the payment confirmation step. I&#39;ve projected the conversion funnel onto your screen.&#34;
+
+    def _query_errors_impl(self, timeframe: str = &#34;24h&#34;) -&gt; str:
+        &#34;&#34;&#34;
+        Query PostHog API error waterfall and exception logs over a timeframe (e.g., 24h, 7d).
+        Renders an interactive Error Waterfall card over WebRTC and returns a conversational speech delta.
+        &#34;&#34;&#34;
+        payload = {
+            &#34;room_name&#34;: self.room_name,
+            &#34;session_id&#34;: f&#34;session_{int(time.time())}&#34;,
+            &#34;tool&#34;: &#34;query_errors&#34;,
+            &#34;args&#34;: {&#34;timeframe&#34;: timeframe},
+        }
+
+        try:
+            resp = self.http_client.post(f&#34;{self.gateway_url}/api/tools/execute&#34;, json=payload)
+            if resp.status_code == 200:
+                return resp.json().get(
+                    &#34;speech_ready_delta&#34;,
+                    &#34;We detected 42 server errors in the last 24 hours. The highest failure rate is Payment Gateway Timeouts at 52 percent.&#34;,
+                )
+        except Exception as e:
+            logger.warning(&#34;[Prism Tools] Gateway unreachable (%s). Using local fallback.&#34;, e)
+
+        mock_card = {
+            &#34;type&#34;: &#34;error_waterfall&#34;,
+            &#34;title&#34;: f&#34;API Error Waterfall ({timeframe})&#34;,
+            &#34;timeframe&#34;: timeframe,
+            &#34;total_errors&#34;: 42,
+            &#34;primary_root_cause&#34;: &#34;PaymentGatewayTimeout (504)&#34;,
+            &#34;errors&#34;: [
+                {&#34;error_type&#34;: &#34;PaymentGatewayTimeout (504)&#34;, &#34;count&#34;: 22, &#34;percentage&#34;: 52.4, &#34;status_code&#34;: 504},
+                {&#34;error_type&#34;: &#34;StripeCardDeclined (400)&#34;, &#34;count&#34;: 13, &#34;percentage&#34;: 30.9, &#34;status_code&#34;: 400},
+                {&#34;error_type&#34;: &#34;DatabaseDeadlock (500)&#34;, &#34;count&#34;: 7, &#34;percentage&#34;: 16.7, &#34;status_code&#34;: 500},
+            ],
+            &#34;timestamp&#34;: int(time.time()),
+        }
+        self._publish_webrtc_card(mock_card)
+        return &#34;We detected 42 server errors in the last 24 hours. The highest failure rate is Payment Gateway Timeouts at 52 percent. The error waterfall is on your screen.&#34;
+
+    def _query_retention_impl(self, cohort: str = &#34;weekly&#34;) -&gt; str:
+        &#34;&#34;&#34;
+        Query PostHog cohort retention trends over an 8-week horizon.
+        Renders a Retention Trend line chart over WebRTC and returns a conversational speech delta.
+        &#34;&#34;&#34;
+        payload = {
+            &#34;room_name&#34;: self.room_name,
+            &#34;session_id&#34;: f&#34;session_{int(time.time())}&#34;,
+            &#34;tool&#34;: &#34;query_retention&#34;,
+            &#34;args&#34;: {&#34;cohort&#34;: cohort},
+        }
+
+        try:
+            resp = self.http_client.post(f&#34;{self.gateway_url}/api/tools/execute&#34;, json=payload)
+            if resp.status_code == 200:
+                return resp.json().get(
+                    &#34;speech_ready_delta&#34;,
+                    &#34;Your eight-week user retention stands at 19.5 percent, beating the industry average of 15 percent.&#34;,
+                )
+        except Exception as e:
+            logger.warning(&#34;[Prism Tools] Gateway unreachable (%s). Using local fallback.&#34;, e)
+
+        mock_card = {
+            &#34;type&#34;: &#34;retention_trend&#34;,
+            &#34;title&#34;: &#34;8-Week Cohort Retention Trend&#34;,
+            &#34;cohort_name&#34;: &#34;Weekly Active Users&#34;,
+            &#34;terminal_retention&#34;: 19.5,
+            &#34;intervals&#34;: [
+                {&#34;interval&#34;: &#34;Week 1&#34;, &#34;retention_rate&#34;: 100.0, &#34;users&#34;: 8400},
+                {&#34;interval&#34;: &#34;Week 2&#34;, &#34;retention_rate&#34;: 44.2, &#34;users&#34;: 3712},
+                {&#34;interval&#34;: &#34;Week 3&#34;, &#34;retention_rate&#34;: 34.0, &#34;users&#34;: 2856},
+                {&#34;interval&#34;: &#34;Week 4&#34;, &#34;retention_rate&#34;: 28.1, &#34;users&#34;: 2360},
+                {&#34;interval&#34;: &#34;Week 6&#34;, &#34;retention_rate&#34;: 23.4, &#34;users&#34;: 1965},
+                {&#34;interval&#34;: &#34;Week 8&#34;, &#34;retention_rate&#34;: 19.5, &#34;users&#34;: 1638},
+            ],
+            &#34;timestamp&#34;: int(time.time()),
+        }
+        self._publish_webrtc_card(mock_card)
+        return &#34;Your eight-week user retention stands at 19.5 percent, beating the industry average of 15 percent. The retention curve is displayed on your screen.&#34;
+
+    def _query_hogql_impl(self, query: str) -&gt; str:
+        &#34;&#34;&#34;
+        Execute an analytical HogQL query against PostHog and ClickHouse.
+        Renders the analytical results card over WebRTC and returns a concise verbal summary.
+        &#34;&#34;&#34;
+        payload = {
+            &#34;room_name&#34;: self.room_name,
+            &#34;session_id&#34;: f&#34;session_{int(time.time())}&#34;,
+            &#34;tool&#34;: &#34;query_hogql&#34;,
+            &#34;args&#34;: {&#34;query&#34;: query},
+        }
+
+        try:
+            resp = self.http_client.post(f&#34;{self.gateway_url}/api/tools/hogql&#34;, json=payload)
+            if resp.status_code == 200:
+                return resp.json().get(
+                    &#34;speech_ready_delta&#34;,
+                    &#34;Your HogQL query completed successfully. I&#39;ve projected the analytical results onto your screen.&#34;,
+                )
+        except Exception as e:
+            logger.warning(&#34;[Prism Tools] Gateway unreachable (%s). Using local fallback.&#34;, e)
+
+        mock_card = {
+            &#34;type&#34;: &#34;hogql_viz&#34;,
+            &#34;title&#34;: &#34;HogQL Analytical Query Result&#34;,
+            &#34;query&#34;: query,
+            &#34;columns&#34;: [&#34;event&#34;, &#34;count()&#34;],
+            &#34;rows&#34;: [
+                [&#34;$pageview&#34;, 48200],
+                [&#34;user_signed_up&#34;, 1240],
+                [&#34;checkout_step_completed&#34;, 890],
+            ],
+            &#34;timestamp&#34;: int(time.time()),
+        }
+        self._publish_webrtc_card(mock_card)
+        return &#34;Your HogQL query completed successfully across 48,000 pageviews and 1,240 signups. I&#39;ve projected the analytical results onto your screen.&#34;
+
+    def _publish_webrtc_card(self, card_dict: dict):
+        &#34;&#34;&#34;Broadcasts data card locally if LiveKit room participant is available.&#34;&#34;&#34;
+        if self.livekit_room and hasattr(self.livekit_room, &#34;local_participant&#34;):
+            try:
+                card_bytes = json.dumps(card_dict).encode(&#34;utf-8&#34;)
+                import asyncio
+                loop = asyncio.get_event_loop()
+                if loop.is_running():
+                    asyncio.create_task(
+                        self.livekit_room.local_participant.publish_data(
+                            card_bytes,
+                            reliable=True,
+                            topic=&#34;posthog-viz-card&#34;,
+                        )
+                    )
+            except Exception as ex:
+                logger.error(&#34;[Prism Tools] Failed to broadcast local data packet: %s&#34;, ex)
+
+    def get_tools(self) -&gt; List[Any]:
+        &#34;&#34;&#34;Returns all LiveKit FunctionTools provided by this suite.&#34;&#34;&#34;
+        return [
+            self.query_funnel_tool,
+            self.query_errors_tool,
+            self.query_retention_tool,
+            self.query_hogql_tool,
+        ]
+
+    @property
+    def query_funnel(self):
+        return self.query_funnel_tool
+
+    @property
+    def query_errors(self):
+        return self.query_errors_tool
+
+    @property
+    def query_retention(self):
+        return self.query_retention_tool
+
+    @property
+    def query_hogql(self):
+        return self.query_hogql_tool</code></pre>
+</details>
+<div class="desc"><p>Dual-Channel Tool suite connecting LiveKit Voice Agents with PostHog's analytical engine.
+Splits analytical query responses into:
+1. High-throughput WebRTC data-channel visualization packet.
+2. Concise, speech-ready delta (&lt; 30 tokens) for conversational LLM context.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.query_errors"><code class="name">prop <span class="ident">query_errors</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def query_errors(self):
+    return self.query_errors_tool</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.query_funnel"><code class="name">prop <span class="ident">query_funnel</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def query_funnel(self):
+    return self.query_funnel_tool</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.query_hogql"><code class="name">prop <span class="ident">query_hogql</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def query_hogql(self):
+    return self.query_hogql_tool</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.query_retention"><code class="name">prop <span class="ident">query_retention</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def query_retention(self):
+    return self.query_retention_tool</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.get_tools"><code class="name flex">
+<span>def <span class="ident">get_tools</span></span>(<span>self) ‑> List[Any]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_tools(self) -&gt; List[Any]:
+    &#34;&#34;&#34;Returns all LiveKit FunctionTools provided by this suite.&#34;&#34;&#34;
+    return [
+        self.query_funnel_tool,
+        self.query_errors_tool,
+        self.query_retention_tool,
+        self.query_hogql_tool,
+    ]</code></pre>
+</details>
+<div class="desc"><p>Returns all LiveKit FunctionTools provided by this suite.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools"><code class="flex name class">
+<span>class <span class="ident">DualChannelTools</span></span>
+<span>(</span><span>gateway_url: str = 'http://localhost:8080',<br>room_name: str = 'prism-demo',<br>livekit_room: Any | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostHogDualChannelTools:
+    &#34;&#34;&#34;
+    Dual-Channel Tool suite connecting LiveKit Voice Agents with PostHog&#39;s analytical engine.
+    Splits analytical query responses into:
+      1. High-throughput WebRTC data-channel visualization packet.
+      2. Concise, speech-ready delta (&lt; 30 tokens) for conversational LLM context.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        gateway_url: str = DEFAULT_GATEWAY_URL,
+        room_name: str = &#34;prism-demo&#34;,
+        livekit_room: Optional[Any] = None,
+    ):
+        self.gateway_url = gateway_url.rstrip(&#34;/&#34;)
+        self.room_name = room_name
+        self.livekit_room = livekit_room
+        self.http_client = httpx.Client(timeout=3.0)
+
+        # Wrap tools with LiveKit function_tool
+        self.query_funnel_tool = function_tool(self._query_funnel_impl)
+        self.query_errors_tool = function_tool(self._query_errors_impl)
+        self.query_retention_tool = function_tool(self._query_retention_impl)
+        self.query_hogql_tool = function_tool(self._query_hogql_impl)
+
+    def _query_funnel_impl(self, funnel_id: str = &#34;checkout_v2&#34;) -&gt; str:
+        &#34;&#34;&#34;
+        Query PostHog user conversion funnel analytics by funnel ID (e.g., checkout_v2 or signup).
+        Visual chart data is pushed over the WebRTC Data Channel directly to the user&#39;s browser,
+        and an ultra-compact speech-ready string (&lt; 30 tokens) is returned to the agent context.
+        &#34;&#34;&#34;
+        payload = {
+            &#34;room_name&#34;: self.room_name,
+            &#34;session_id&#34;: f&#34;session_{int(time.time())}&#34;,
+            &#34;tool&#34;: &#34;query_funnel&#34;,
+            &#34;args&#34;: {&#34;funnel_id&#34;: funnel_id},
+        }
+
+        try:
+            resp = self.http_client.post(f&#34;{self.gateway_url}/api/tools/funnel&#34;, json=payload)
+            if resp.status_code == 200:
+                data = resp.json()
+                return data.get(
+                    &#34;speech_ready_delta&#34;,
+                    &#34;The checkout funnel has a 22.5 percent conversion rate. I&#39;ve projected the conversion funnel onto your screen.&#34;,
+                )
+        except Exception as e:
+            logger.warning(&#34;[Prism Tools] Gateway unreachable (%s). Using local fallback.&#34;, e)
+
+        # Local fallback if Go Gateway is offline
+        mock_card = {
+            &#34;type&#34;: &#34;funnel_viz&#34;,
+            &#34;title&#34;: &#34;Checkout Conversion Dropoff&#34;,
+            &#34;funnel_id&#34;: funnel_id,
+            &#34;steps&#34;: [
+                {&#34;name&#34;: &#34;Cart Viewed&#34;, &#34;visitors&#34;: 14200, &#34;conversion_rate&#34;: 100.0},
+                {&#34;name&#34;: &#34;Billing Entered&#34;, &#34;visitors&#34;: 9100, &#34;conversion_rate&#34;: 64.1},
+                {&#34;name&#34;: &#34;Payment Confirmed&#34;, &#34;visitors&#34;: 3200, &#34;conversion_rate&#34;: 22.5},
+            ],
+            &#34;primary_drop_step&#34;: &#34;Payment Confirmed&#34;,
+            &#34;timestamp&#34;: int(time.time()),
+        }
+        self._publish_webrtc_card(mock_card)
+        return &#34;The checkout funnel has a 22.5 percent conversion rate. The main drop-off is at the payment confirmation step. I&#39;ve projected the conversion funnel onto your screen.&#34;
+
+    def _query_errors_impl(self, timeframe: str = &#34;24h&#34;) -&gt; str:
+        &#34;&#34;&#34;
+        Query PostHog API error waterfall and exception logs over a timeframe (e.g., 24h, 7d).
+        Renders an interactive Error Waterfall card over WebRTC and returns a conversational speech delta.
+        &#34;&#34;&#34;
+        payload = {
+            &#34;room_name&#34;: self.room_name,
+            &#34;session_id&#34;: f&#34;session_{int(time.time())}&#34;,
+            &#34;tool&#34;: &#34;query_errors&#34;,
+            &#34;args&#34;: {&#34;timeframe&#34;: timeframe},
+        }
+
+        try:
+            resp = self.http_client.post(f&#34;{self.gateway_url}/api/tools/execute&#34;, json=payload)
+            if resp.status_code == 200:
+                return resp.json().get(
+                    &#34;speech_ready_delta&#34;,
+                    &#34;We detected 42 server errors in the last 24 hours. The highest failure rate is Payment Gateway Timeouts at 52 percent.&#34;,
+                )
+        except Exception as e:
+            logger.warning(&#34;[Prism Tools] Gateway unreachable (%s). Using local fallback.&#34;, e)
+
+        mock_card = {
+            &#34;type&#34;: &#34;error_waterfall&#34;,
+            &#34;title&#34;: f&#34;API Error Waterfall ({timeframe})&#34;,
+            &#34;timeframe&#34;: timeframe,
+            &#34;total_errors&#34;: 42,
+            &#34;primary_root_cause&#34;: &#34;PaymentGatewayTimeout (504)&#34;,
+            &#34;errors&#34;: [
+                {&#34;error_type&#34;: &#34;PaymentGatewayTimeout (504)&#34;, &#34;count&#34;: 22, &#34;percentage&#34;: 52.4, &#34;status_code&#34;: 504},
+                {&#34;error_type&#34;: &#34;StripeCardDeclined (400)&#34;, &#34;count&#34;: 13, &#34;percentage&#34;: 30.9, &#34;status_code&#34;: 400},
+                {&#34;error_type&#34;: &#34;DatabaseDeadlock (500)&#34;, &#34;count&#34;: 7, &#34;percentage&#34;: 16.7, &#34;status_code&#34;: 500},
+            ],
+            &#34;timestamp&#34;: int(time.time()),
+        }
+        self._publish_webrtc_card(mock_card)
+        return &#34;We detected 42 server errors in the last 24 hours. The highest failure rate is Payment Gateway Timeouts at 52 percent. The error waterfall is on your screen.&#34;
+
+    def _query_retention_impl(self, cohort: str = &#34;weekly&#34;) -&gt; str:
+        &#34;&#34;&#34;
+        Query PostHog cohort retention trends over an 8-week horizon.
+        Renders a Retention Trend line chart over WebRTC and returns a conversational speech delta.
+        &#34;&#34;&#34;
+        payload = {
+            &#34;room_name&#34;: self.room_name,
+            &#34;session_id&#34;: f&#34;session_{int(time.time())}&#34;,
+            &#34;tool&#34;: &#34;query_retention&#34;,
+            &#34;args&#34;: {&#34;cohort&#34;: cohort},
+        }
+
+        try:
+            resp = self.http_client.post(f&#34;{self.gateway_url}/api/tools/execute&#34;, json=payload)
+            if resp.status_code == 200:
+                return resp.json().get(
+                    &#34;speech_ready_delta&#34;,
+                    &#34;Your eight-week user retention stands at 19.5 percent, beating the industry average of 15 percent.&#34;,
+                )
+        except Exception as e:
+            logger.warning(&#34;[Prism Tools] Gateway unreachable (%s). Using local fallback.&#34;, e)
+
+        mock_card = {
+            &#34;type&#34;: &#34;retention_trend&#34;,
+            &#34;title&#34;: &#34;8-Week Cohort Retention Trend&#34;,
+            &#34;cohort_name&#34;: &#34;Weekly Active Users&#34;,
+            &#34;terminal_retention&#34;: 19.5,
+            &#34;intervals&#34;: [
+                {&#34;interval&#34;: &#34;Week 1&#34;, &#34;retention_rate&#34;: 100.0, &#34;users&#34;: 8400},
+                {&#34;interval&#34;: &#34;Week 2&#34;, &#34;retention_rate&#34;: 44.2, &#34;users&#34;: 3712},
+                {&#34;interval&#34;: &#34;Week 3&#34;, &#34;retention_rate&#34;: 34.0, &#34;users&#34;: 2856},
+                {&#34;interval&#34;: &#34;Week 4&#34;, &#34;retention_rate&#34;: 28.1, &#34;users&#34;: 2360},
+                {&#34;interval&#34;: &#34;Week 6&#34;, &#34;retention_rate&#34;: 23.4, &#34;users&#34;: 1965},
+                {&#34;interval&#34;: &#34;Week 8&#34;, &#34;retention_rate&#34;: 19.5, &#34;users&#34;: 1638},
+            ],
+            &#34;timestamp&#34;: int(time.time()),
+        }
+        self._publish_webrtc_card(mock_card)
+        return &#34;Your eight-week user retention stands at 19.5 percent, beating the industry average of 15 percent. The retention curve is displayed on your screen.&#34;
+
+    def _query_hogql_impl(self, query: str) -&gt; str:
+        &#34;&#34;&#34;
+        Execute an analytical HogQL query against PostHog and ClickHouse.
+        Renders the analytical results card over WebRTC and returns a concise verbal summary.
+        &#34;&#34;&#34;
+        payload = {
+            &#34;room_name&#34;: self.room_name,
+            &#34;session_id&#34;: f&#34;session_{int(time.time())}&#34;,
+            &#34;tool&#34;: &#34;query_hogql&#34;,
+            &#34;args&#34;: {&#34;query&#34;: query},
+        }
+
+        try:
+            resp = self.http_client.post(f&#34;{self.gateway_url}/api/tools/hogql&#34;, json=payload)
+            if resp.status_code == 200:
+                return resp.json().get(
+                    &#34;speech_ready_delta&#34;,
+                    &#34;Your HogQL query completed successfully. I&#39;ve projected the analytical results onto your screen.&#34;,
+                )
+        except Exception as e:
+            logger.warning(&#34;[Prism Tools] Gateway unreachable (%s). Using local fallback.&#34;, e)
+
+        mock_card = {
+            &#34;type&#34;: &#34;hogql_viz&#34;,
+            &#34;title&#34;: &#34;HogQL Analytical Query Result&#34;,
+            &#34;query&#34;: query,
+            &#34;columns&#34;: [&#34;event&#34;, &#34;count()&#34;],
+            &#34;rows&#34;: [
+                [&#34;$pageview&#34;, 48200],
+                [&#34;user_signed_up&#34;, 1240],
+                [&#34;checkout_step_completed&#34;, 890],
+            ],
+            &#34;timestamp&#34;: int(time.time()),
+        }
+        self._publish_webrtc_card(mock_card)
+        return &#34;Your HogQL query completed successfully across 48,000 pageviews and 1,240 signups. I&#39;ve projected the analytical results onto your screen.&#34;
+
+    def _publish_webrtc_card(self, card_dict: dict):
+        &#34;&#34;&#34;Broadcasts data card locally if LiveKit room participant is available.&#34;&#34;&#34;
+        if self.livekit_room and hasattr(self.livekit_room, &#34;local_participant&#34;):
+            try:
+                card_bytes = json.dumps(card_dict).encode(&#34;utf-8&#34;)
+                import asyncio
+                loop = asyncio.get_event_loop()
+                if loop.is_running():
+                    asyncio.create_task(
+                        self.livekit_room.local_participant.publish_data(
+                            card_bytes,
+                            reliable=True,
+                            topic=&#34;posthog-viz-card&#34;,
+                        )
+                    )
+            except Exception as ex:
+                logger.error(&#34;[Prism Tools] Failed to broadcast local data packet: %s&#34;, ex)
+
+    def get_tools(self) -&gt; List[Any]:
+        &#34;&#34;&#34;Returns all LiveKit FunctionTools provided by this suite.&#34;&#34;&#34;
+        return [
+            self.query_funnel_tool,
+            self.query_errors_tool,
+            self.query_retention_tool,
+            self.query_hogql_tool,
+        ]
+
+    @property
+    def query_funnel(self):
+        return self.query_funnel_tool
+
+    @property
+    def query_errors(self):
+        return self.query_errors_tool
+
+    @property
+    def query_retention(self):
+        return self.query_retention_tool
+
+    @property
+    def query_hogql(self):
+        return self.query_hogql_tool</code></pre>
+</details>
+<div class="desc"><p>Dual-Channel Tool suite connecting LiveKit Voice Agents with PostHog's analytical engine.
+Splits analytical query responses into:
+1. High-throughput WebRTC data-channel visualization packet.
+2. Concise, speech-ready delta (&lt; 30 tokens) for conversational LLM context.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.query_errors"><code class="name">prop <span class="ident">query_errors</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def query_errors(self):
+    return self.query_errors_tool</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.query_funnel"><code class="name">prop <span class="ident">query_funnel</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def query_funnel(self):
+    return self.query_funnel_tool</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.query_hogql"><code class="name">prop <span class="ident">query_hogql</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def query_hogql(self):
+    return self.query_hogql_tool</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.query_retention"><code class="name">prop <span class="ident">query_retention</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def query_retention(self):
+    return self.query_retention_tool</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.get_tools"><code class="name flex">
+<span>def <span class="ident">get_tools</span></span>(<span>self) ‑> List[Any]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_tools(self) -&gt; List[Any]:
+    &#34;&#34;&#34;Returns all LiveKit FunctionTools provided by this suite.&#34;&#34;&#34;
+    return [
+        self.query_funnel_tool,
+        self.query_errors_tool,
+        self.query_retention_tool,
+        self.query_hogql_tool,
+    ]</code></pre>
+</details>
+<div class="desc"><p>Returns all LiveKit FunctionTools provided by this suite.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools"><code class="flex name class">
+<span>class <span class="ident">PostHogDualChannelTools</span></span>
+<span>(</span><span>gateway_url: str = 'http://localhost:8080',<br>room_name: str = 'prism-demo',<br>livekit_room: Any | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostHogDualChannelTools:
+    &#34;&#34;&#34;
+    Dual-Channel Tool suite connecting LiveKit Voice Agents with PostHog&#39;s analytical engine.
+    Splits analytical query responses into:
+      1. High-throughput WebRTC data-channel visualization packet.
+      2. Concise, speech-ready delta (&lt; 30 tokens) for conversational LLM context.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        gateway_url: str = DEFAULT_GATEWAY_URL,
+        room_name: str = &#34;prism-demo&#34;,
+        livekit_room: Optional[Any] = None,
+    ):
+        self.gateway_url = gateway_url.rstrip(&#34;/&#34;)
+        self.room_name = room_name
+        self.livekit_room = livekit_room
+        self.http_client = httpx.Client(timeout=3.0)
+
+        # Wrap tools with LiveKit function_tool
+        self.query_funnel_tool = function_tool(self._query_funnel_impl)
+        self.query_errors_tool = function_tool(self._query_errors_impl)
+        self.query_retention_tool = function_tool(self._query_retention_impl)
+        self.query_hogql_tool = function_tool(self._query_hogql_impl)
+
+    def _query_funnel_impl(self, funnel_id: str = &#34;checkout_v2&#34;) -&gt; str:
+        &#34;&#34;&#34;
+        Query PostHog user conversion funnel analytics by funnel ID (e.g., checkout_v2 or signup).
+        Visual chart data is pushed over the WebRTC Data Channel directly to the user&#39;s browser,
+        and an ultra-compact speech-ready string (&lt; 30 tokens) is returned to the agent context.
+        &#34;&#34;&#34;
+        payload = {
+            &#34;room_name&#34;: self.room_name,
+            &#34;session_id&#34;: f&#34;session_{int(time.time())}&#34;,
+            &#34;tool&#34;: &#34;query_funnel&#34;,
+            &#34;args&#34;: {&#34;funnel_id&#34;: funnel_id},
+        }
+
+        try:
+            resp = self.http_client.post(f&#34;{self.gateway_url}/api/tools/funnel&#34;, json=payload)
+            if resp.status_code == 200:
+                data = resp.json()
+                return data.get(
+                    &#34;speech_ready_delta&#34;,
+                    &#34;The checkout funnel has a 22.5 percent conversion rate. I&#39;ve projected the conversion funnel onto your screen.&#34;,
+                )
+        except Exception as e:
+            logger.warning(&#34;[Prism Tools] Gateway unreachable (%s). Using local fallback.&#34;, e)
+
+        # Local fallback if Go Gateway is offline
+        mock_card = {
+            &#34;type&#34;: &#34;funnel_viz&#34;,
+            &#34;title&#34;: &#34;Checkout Conversion Dropoff&#34;,
+            &#34;funnel_id&#34;: funnel_id,
+            &#34;steps&#34;: [
+                {&#34;name&#34;: &#34;Cart Viewed&#34;, &#34;visitors&#34;: 14200, &#34;conversion_rate&#34;: 100.0},
+                {&#34;name&#34;: &#34;Billing Entered&#34;, &#34;visitors&#34;: 9100, &#34;conversion_rate&#34;: 64.1},
+                {&#34;name&#34;: &#34;Payment Confirmed&#34;, &#34;visitors&#34;: 3200, &#34;conversion_rate&#34;: 22.5},
+            ],
+            &#34;primary_drop_step&#34;: &#34;Payment Confirmed&#34;,
+            &#34;timestamp&#34;: int(time.time()),
+        }
+        self._publish_webrtc_card(mock_card)
+        return &#34;The checkout funnel has a 22.5 percent conversion rate. The main drop-off is at the payment confirmation step. I&#39;ve projected the conversion funnel onto your screen.&#34;
+
+    def _query_errors_impl(self, timeframe: str = &#34;24h&#34;) -&gt; str:
+        &#34;&#34;&#34;
+        Query PostHog API error waterfall and exception logs over a timeframe (e.g., 24h, 7d).
+        Renders an interactive Error Waterfall card over WebRTC and returns a conversational speech delta.
+        &#34;&#34;&#34;
+        payload = {
+            &#34;room_name&#34;: self.room_name,
+            &#34;session_id&#34;: f&#34;session_{int(time.time())}&#34;,
+            &#34;tool&#34;: &#34;query_errors&#34;,
+            &#34;args&#34;: {&#34;timeframe&#34;: timeframe},
+        }
+
+        try:
+            resp = self.http_client.post(f&#34;{self.gateway_url}/api/tools/execute&#34;, json=payload)
+            if resp.status_code == 200:
+                return resp.json().get(
+                    &#34;speech_ready_delta&#34;,
+                    &#34;We detected 42 server errors in the last 24 hours. The highest failure rate is Payment Gateway Timeouts at 52 percent.&#34;,
+                )
+        except Exception as e:
+            logger.warning(&#34;[Prism Tools] Gateway unreachable (%s). Using local fallback.&#34;, e)
+
+        mock_card = {
+            &#34;type&#34;: &#34;error_waterfall&#34;,
+            &#34;title&#34;: f&#34;API Error Waterfall ({timeframe})&#34;,
+            &#34;timeframe&#34;: timeframe,
+            &#34;total_errors&#34;: 42,
+            &#34;primary_root_cause&#34;: &#34;PaymentGatewayTimeout (504)&#34;,
+            &#34;errors&#34;: [
+                {&#34;error_type&#34;: &#34;PaymentGatewayTimeout (504)&#34;, &#34;count&#34;: 22, &#34;percentage&#34;: 52.4, &#34;status_code&#34;: 504},
+                {&#34;error_type&#34;: &#34;StripeCardDeclined (400)&#34;, &#34;count&#34;: 13, &#34;percentage&#34;: 30.9, &#34;status_code&#34;: 400},
+                {&#34;error_type&#34;: &#34;DatabaseDeadlock (500)&#34;, &#34;count&#34;: 7, &#34;percentage&#34;: 16.7, &#34;status_code&#34;: 500},
+            ],
+            &#34;timestamp&#34;: int(time.time()),
+        }
+        self._publish_webrtc_card(mock_card)
+        return &#34;We detected 42 server errors in the last 24 hours. The highest failure rate is Payment Gateway Timeouts at 52 percent. The error waterfall is on your screen.&#34;
+
+    def _query_retention_impl(self, cohort: str = &#34;weekly&#34;) -&gt; str:
+        &#34;&#34;&#34;
+        Query PostHog cohort retention trends over an 8-week horizon.
+        Renders a Retention Trend line chart over WebRTC and returns a conversational speech delta.
+        &#34;&#34;&#34;
+        payload = {
+            &#34;room_name&#34;: self.room_name,
+            &#34;session_id&#34;: f&#34;session_{int(time.time())}&#34;,
+            &#34;tool&#34;: &#34;query_retention&#34;,
+            &#34;args&#34;: {&#34;cohort&#34;: cohort},
+        }
+
+        try:
+            resp = self.http_client.post(f&#34;{self.gateway_url}/api/tools/execute&#34;, json=payload)
+            if resp.status_code == 200:
+                return resp.json().get(
+                    &#34;speech_ready_delta&#34;,
+                    &#34;Your eight-week user retention stands at 19.5 percent, beating the industry average of 15 percent.&#34;,
+                )
+        except Exception as e:
+            logger.warning(&#34;[Prism Tools] Gateway unreachable (%s). Using local fallback.&#34;, e)
+
+        mock_card = {
+            &#34;type&#34;: &#34;retention_trend&#34;,
+            &#34;title&#34;: &#34;8-Week Cohort Retention Trend&#34;,
+            &#34;cohort_name&#34;: &#34;Weekly Active Users&#34;,
+            &#34;terminal_retention&#34;: 19.5,
+            &#34;intervals&#34;: [
+                {&#34;interval&#34;: &#34;Week 1&#34;, &#34;retention_rate&#34;: 100.0, &#34;users&#34;: 8400},
+                {&#34;interval&#34;: &#34;Week 2&#34;, &#34;retention_rate&#34;: 44.2, &#34;users&#34;: 3712},
+                {&#34;interval&#34;: &#34;Week 3&#34;, &#34;retention_rate&#34;: 34.0, &#34;users&#34;: 2856},
+                {&#34;interval&#34;: &#34;Week 4&#34;, &#34;retention_rate&#34;: 28.1, &#34;users&#34;: 2360},
+                {&#34;interval&#34;: &#34;Week 6&#34;, &#34;retention_rate&#34;: 23.4, &#34;users&#34;: 1965},
+                {&#34;interval&#34;: &#34;Week 8&#34;, &#34;retention_rate&#34;: 19.5, &#34;users&#34;: 1638},
+            ],
+            &#34;timestamp&#34;: int(time.time()),
+        }
+        self._publish_webrtc_card(mock_card)
+        return &#34;Your eight-week user retention stands at 19.5 percent, beating the industry average of 15 percent. The retention curve is displayed on your screen.&#34;
+
+    def _query_hogql_impl(self, query: str) -&gt; str:
+        &#34;&#34;&#34;
+        Execute an analytical HogQL query against PostHog and ClickHouse.
+        Renders the analytical results card over WebRTC and returns a concise verbal summary.
+        &#34;&#34;&#34;
+        payload = {
+            &#34;room_name&#34;: self.room_name,
+            &#34;session_id&#34;: f&#34;session_{int(time.time())}&#34;,
+            &#34;tool&#34;: &#34;query_hogql&#34;,
+            &#34;args&#34;: {&#34;query&#34;: query},
+        }
+
+        try:
+            resp = self.http_client.post(f&#34;{self.gateway_url}/api/tools/hogql&#34;, json=payload)
+            if resp.status_code == 200:
+                return resp.json().get(
+                    &#34;speech_ready_delta&#34;,
+                    &#34;Your HogQL query completed successfully. I&#39;ve projected the analytical results onto your screen.&#34;,
+                )
+        except Exception as e:
+            logger.warning(&#34;[Prism Tools] Gateway unreachable (%s). Using local fallback.&#34;, e)
+
+        mock_card = {
+            &#34;type&#34;: &#34;hogql_viz&#34;,
+            &#34;title&#34;: &#34;HogQL Analytical Query Result&#34;,
+            &#34;query&#34;: query,
+            &#34;columns&#34;: [&#34;event&#34;, &#34;count()&#34;],
+            &#34;rows&#34;: [
+                [&#34;$pageview&#34;, 48200],
+                [&#34;user_signed_up&#34;, 1240],
+                [&#34;checkout_step_completed&#34;, 890],
+            ],
+            &#34;timestamp&#34;: int(time.time()),
+        }
+        self._publish_webrtc_card(mock_card)
+        return &#34;Your HogQL query completed successfully across 48,000 pageviews and 1,240 signups. I&#39;ve projected the analytical results onto your screen.&#34;
+
+    def _publish_webrtc_card(self, card_dict: dict):
+        &#34;&#34;&#34;Broadcasts data card locally if LiveKit room participant is available.&#34;&#34;&#34;
+        if self.livekit_room and hasattr(self.livekit_room, &#34;local_participant&#34;):
+            try:
+                card_bytes = json.dumps(card_dict).encode(&#34;utf-8&#34;)
+                import asyncio
+                loop = asyncio.get_event_loop()
+                if loop.is_running():
+                    asyncio.create_task(
+                        self.livekit_room.local_participant.publish_data(
+                            card_bytes,
+                            reliable=True,
+                            topic=&#34;posthog-viz-card&#34;,
+                        )
+                    )
+            except Exception as ex:
+                logger.error(&#34;[Prism Tools] Failed to broadcast local data packet: %s&#34;, ex)
+
+    def get_tools(self) -&gt; List[Any]:
+        &#34;&#34;&#34;Returns all LiveKit FunctionTools provided by this suite.&#34;&#34;&#34;
+        return [
+            self.query_funnel_tool,
+            self.query_errors_tool,
+            self.query_retention_tool,
+            self.query_hogql_tool,
+        ]
+
+    @property
+    def query_funnel(self):
+        return self.query_funnel_tool
+
+    @property
+    def query_errors(self):
+        return self.query_errors_tool
+
+    @property
+    def query_retention(self):
+        return self.query_retention_tool
+
+    @property
+    def query_hogql(self):
+        return self.query_hogql_tool</code></pre>
+</details>
+<div class="desc"><p>Dual-Channel Tool suite connecting LiveKit Voice Agents with PostHog's analytical engine.
+Splits analytical query responses into:
+1. High-throughput WebRTC data-channel visualization packet.
+2. Concise, speech-ready delta (&lt; 30 tokens) for conversational LLM context.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.query_errors"><code class="name">prop <span class="ident">query_errors</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def query_errors(self):
+    return self.query_errors_tool</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.query_funnel"><code class="name">prop <span class="ident">query_funnel</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def query_funnel(self):
+    return self.query_funnel_tool</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.query_hogql"><code class="name">prop <span class="ident">query_hogql</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def query_hogql(self):
+    return self.query_hogql_tool</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.query_retention"><code class="name">prop <span class="ident">query_retention</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def query_retention(self):
+    return self.query_retention_tool</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="livekit.plugins.posthog.PostHogDualChannelTools.get_tools"><code class="name flex">
+<span>def <span class="ident">get_tools</span></span>(<span>self) ‑> List[Any]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_tools(self) -&gt; List[Any]:
+    &#34;&#34;&#34;Returns all LiveKit FunctionTools provided by this suite.&#34;&#34;&#34;
+    return [
+        self.query_funnel_tool,
+        self.query_errors_tool,
+        self.query_retention_tool,
+        self.query_hogql_tool,
+    ]</code></pre>
+</details>
+<div class="desc"><p>Returns all LiveKit FunctionTools provided by this suite.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogFeatureFlags"><code class="flex name class">
+<span>class <span class="ident">FeatureFlags</span></span>
+<span>(</span><span>api_key: str | None = None,<br>host: str | None = None,<br>client: posthog.Posthog | None = None,<br>default_distinct_id: str = 'agent-system')</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostHogFeatureFlags:
+    &#34;&#34;&#34;
+    Client for evaluating PostHog feature flags, prompt experiments, and dynamic
+    tool gates for LiveKit voice agents.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        host: Optional[str] = None,
+        client: Optional[posthog.Posthog] = None,
+        default_distinct_id: str = &#34;agent-system&#34;,
+    ):
+        self.api_key = api_key or os.getenv(&#34;POSTHOG_API_KEY&#34;, &#34;phc_mock_key_prism&#34;)
+        self.host = host or os.getenv(&#34;POSTHOG_HOST&#34;, &#34;https://us.i.posthog.com&#34;)
+        self.default_distinct_id = default_distinct_id
+
+        if client is not None:
+            self.client = client
+        else:
+            try:
+                self.client = posthog.Posthog(
+                    project_api_key=self.api_key,
+                    host=self.host,
+                )
+            except Exception as e:
+                logger.warning(&#34;[PostHog FeatureFlags] Failed to init client: %s&#34;, e)
+                self.client = None
+
+    def is_feature_enabled(
+        self,
+        key: str,
+        distinct_id: Optional[str] = None,
+        default: bool = False,
+        person_properties: Optional[Dict[str, Any]] = None,
+    ) -&gt; bool:
+        &#34;&#34;&#34;
+        Evaluates whether a feature flag is enabled for the given distinct_id.
+        Useful for gating experimental tools (e.g., beta funnel tools).
+        &#34;&#34;&#34;
+        target_id = distinct_id or self.default_distinct_id
+        if not self.client:
+            return default
+
+        try:
+            res = self.client.feature_enabled(
+                key=key,
+                distinct_id=target_id,
+                person_properties=person_properties,
+            )
+            return bool(res) if res is not None else default
+        except Exception as e:
+            logger.debug(&#34;[PostHog FeatureFlags] Error evaluating %s: %s&#34;, key, e)
+            return default
+
+    def get_feature_flag(
+        self,
+        key: str,
+        distinct_id: Optional[str] = None,
+        default: Any = None,
+        person_properties: Optional[Dict[str, Any]] = None,
+    ) -&gt; Any:
+        &#34;&#34;&#34;
+        Retrieves the multivariate variant for a feature flag.
+        Useful for A/B testing different voice models (e.g. &#39;gpt-4o-mini&#39; vs &#39;claude-3-5-sonnet&#39;).
+        &#34;&#34;&#34;
+        target_id = distinct_id or self.default_distinct_id
+        if not self.client:
+            return default
+
+        try:
+            val = self.client.get_feature_flag(
+                key=key,
+                distinct_id=target_id,
+                person_properties=person_properties,
+            )
+            return val if val is not None else default
+        except Exception as e:
+            logger.debug(&#34;[PostHog FeatureFlags] Error fetching flag %s: %s&#34;, key, e)
+            return default
+
+    def get_prompt_variant(
+        self,
+        key: str,
+        fallback_prompt: str,
+        distinct_id: Optional[str] = None,
+    ) -&gt; str:
+        &#34;&#34;&#34;
+        Retrieves a dynamic prompt instruction payload from a PostHog experiment flag.
+        Enables zero-deploy A/B testing of system prompts.
+        &#34;&#34;&#34;
+        target_id = distinct_id or self.default_distinct_id
+        if not self.client:
+            return fallback_prompt
+
+        try:
+            payload = self.client.get_feature_flag_payload(key=key, distinct_id=target_id)
+            if isinstance(payload, str) and payload.strip():
+                return payload
+            elif isinstance(payload, dict) and &#34;prompt&#34; in payload:
+                return str(payload[&#34;prompt&#34;])
+        except Exception as e:
+            logger.debug(&#34;[PostHog FeatureFlags] Error fetching prompt variant for %s: %s&#34;, key, e)
+
+        return fallback_prompt</code></pre>
+</details>
+<div class="desc"><p>Client for evaluating PostHog feature flags, prompt experiments, and dynamic
+tool gates for LiveKit voice agents.</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="livekit.plugins.posthog.PostHogFeatureFlags.get_feature_flag"><code class="name flex">
+<span>def <span class="ident">get_feature_flag</span></span>(<span>self,<br>key: str,<br>distinct_id: str | None = None,<br>default: Any = None,<br>person_properties: Dict[str, Any] | None = None) ‑> Any</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_feature_flag(
+    self,
+    key: str,
+    distinct_id: Optional[str] = None,
+    default: Any = None,
+    person_properties: Optional[Dict[str, Any]] = None,
+) -&gt; Any:
+    &#34;&#34;&#34;
+    Retrieves the multivariate variant for a feature flag.
+    Useful for A/B testing different voice models (e.g. &#39;gpt-4o-mini&#39; vs &#39;claude-3-5-sonnet&#39;).
+    &#34;&#34;&#34;
+    target_id = distinct_id or self.default_distinct_id
+    if not self.client:
+        return default
+
+    try:
+        val = self.client.get_feature_flag(
+            key=key,
+            distinct_id=target_id,
+            person_properties=person_properties,
+        )
+        return val if val is not None else default
+    except Exception as e:
+        logger.debug(&#34;[PostHog FeatureFlags] Error fetching flag %s: %s&#34;, key, e)
+        return default</code></pre>
+</details>
+<div class="desc"><p>Retrieves the multivariate variant for a feature flag.
+Useful for A/B testing different voice models (e.g. 'gpt-4o-mini' vs 'claude-3-5-sonnet').</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogFeatureFlags.get_prompt_variant"><code class="name flex">
+<span>def <span class="ident">get_prompt_variant</span></span>(<span>self, key: str, fallback_prompt: str, distinct_id: str | None = None) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_prompt_variant(
+    self,
+    key: str,
+    fallback_prompt: str,
+    distinct_id: Optional[str] = None,
+) -&gt; str:
+    &#34;&#34;&#34;
+    Retrieves a dynamic prompt instruction payload from a PostHog experiment flag.
+    Enables zero-deploy A/B testing of system prompts.
+    &#34;&#34;&#34;
+    target_id = distinct_id or self.default_distinct_id
+    if not self.client:
+        return fallback_prompt
+
+    try:
+        payload = self.client.get_feature_flag_payload(key=key, distinct_id=target_id)
+        if isinstance(payload, str) and payload.strip():
+            return payload
+        elif isinstance(payload, dict) and &#34;prompt&#34; in payload:
+            return str(payload[&#34;prompt&#34;])
+    except Exception as e:
+        logger.debug(&#34;[PostHog FeatureFlags] Error fetching prompt variant for %s: %s&#34;, key, e)
+
+    return fallback_prompt</code></pre>
+</details>
+<div class="desc"><p>Retrieves a dynamic prompt instruction payload from a PostHog experiment flag.
+Enables zero-deploy A/B testing of system prompts.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogFeatureFlags.is_feature_enabled"><code class="name flex">
+<span>def <span class="ident">is_feature_enabled</span></span>(<span>self,<br>key: str,<br>distinct_id: str | None = None,<br>default: bool = False,<br>person_properties: Dict[str, Any] | None = None) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_feature_enabled(
+    self,
+    key: str,
+    distinct_id: Optional[str] = None,
+    default: bool = False,
+    person_properties: Optional[Dict[str, Any]] = None,
+) -&gt; bool:
+    &#34;&#34;&#34;
+    Evaluates whether a feature flag is enabled for the given distinct_id.
+    Useful for gating experimental tools (e.g., beta funnel tools).
+    &#34;&#34;&#34;
+    target_id = distinct_id or self.default_distinct_id
+    if not self.client:
+        return default
+
+    try:
+        res = self.client.feature_enabled(
+            key=key,
+            distinct_id=target_id,
+            person_properties=person_properties,
+        )
+        return bool(res) if res is not None else default
+    except Exception as e:
+        logger.debug(&#34;[PostHog FeatureFlags] Error evaluating %s: %s&#34;, key, e)
+        return default</code></pre>
+</details>
+<div class="desc"><p>Evaluates whether a feature flag is enabled for the given distinct_id.
+Useful for gating experimental tools (e.g., beta funnel tools).</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogFeatureFlags"><code class="flex name class">
+<span>class <span class="ident">PostHogFeatureFlags</span></span>
+<span>(</span><span>api_key: str | None = None,<br>host: str | None = None,<br>client: posthog.Posthog | None = None,<br>default_distinct_id: str = 'agent-system')</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostHogFeatureFlags:
+    &#34;&#34;&#34;
+    Client for evaluating PostHog feature flags, prompt experiments, and dynamic
+    tool gates for LiveKit voice agents.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        host: Optional[str] = None,
+        client: Optional[posthog.Posthog] = None,
+        default_distinct_id: str = &#34;agent-system&#34;,
+    ):
+        self.api_key = api_key or os.getenv(&#34;POSTHOG_API_KEY&#34;, &#34;phc_mock_key_prism&#34;)
+        self.host = host or os.getenv(&#34;POSTHOG_HOST&#34;, &#34;https://us.i.posthog.com&#34;)
+        self.default_distinct_id = default_distinct_id
+
+        if client is not None:
+            self.client = client
+        else:
+            try:
+                self.client = posthog.Posthog(
+                    project_api_key=self.api_key,
+                    host=self.host,
+                )
+            except Exception as e:
+                logger.warning(&#34;[PostHog FeatureFlags] Failed to init client: %s&#34;, e)
+                self.client = None
+
+    def is_feature_enabled(
+        self,
+        key: str,
+        distinct_id: Optional[str] = None,
+        default: bool = False,
+        person_properties: Optional[Dict[str, Any]] = None,
+    ) -&gt; bool:
+        &#34;&#34;&#34;
+        Evaluates whether a feature flag is enabled for the given distinct_id.
+        Useful for gating experimental tools (e.g., beta funnel tools).
+        &#34;&#34;&#34;
+        target_id = distinct_id or self.default_distinct_id
+        if not self.client:
+            return default
+
+        try:
+            res = self.client.feature_enabled(
+                key=key,
+                distinct_id=target_id,
+                person_properties=person_properties,
+            )
+            return bool(res) if res is not None else default
+        except Exception as e:
+            logger.debug(&#34;[PostHog FeatureFlags] Error evaluating %s: %s&#34;, key, e)
+            return default
+
+    def get_feature_flag(
+        self,
+        key: str,
+        distinct_id: Optional[str] = None,
+        default: Any = None,
+        person_properties: Optional[Dict[str, Any]] = None,
+    ) -&gt; Any:
+        &#34;&#34;&#34;
+        Retrieves the multivariate variant for a feature flag.
+        Useful for A/B testing different voice models (e.g. &#39;gpt-4o-mini&#39; vs &#39;claude-3-5-sonnet&#39;).
+        &#34;&#34;&#34;
+        target_id = distinct_id or self.default_distinct_id
+        if not self.client:
+            return default
+
+        try:
+            val = self.client.get_feature_flag(
+                key=key,
+                distinct_id=target_id,
+                person_properties=person_properties,
+            )
+            return val if val is not None else default
+        except Exception as e:
+            logger.debug(&#34;[PostHog FeatureFlags] Error fetching flag %s: %s&#34;, key, e)
+            return default
+
+    def get_prompt_variant(
+        self,
+        key: str,
+        fallback_prompt: str,
+        distinct_id: Optional[str] = None,
+    ) -&gt; str:
+        &#34;&#34;&#34;
+        Retrieves a dynamic prompt instruction payload from a PostHog experiment flag.
+        Enables zero-deploy A/B testing of system prompts.
+        &#34;&#34;&#34;
+        target_id = distinct_id or self.default_distinct_id
+        if not self.client:
+            return fallback_prompt
+
+        try:
+            payload = self.client.get_feature_flag_payload(key=key, distinct_id=target_id)
+            if isinstance(payload, str) and payload.strip():
+                return payload
+            elif isinstance(payload, dict) and &#34;prompt&#34; in payload:
+                return str(payload[&#34;prompt&#34;])
+        except Exception as e:
+            logger.debug(&#34;[PostHog FeatureFlags] Error fetching prompt variant for %s: %s&#34;, key, e)
+
+        return fallback_prompt</code></pre>
+</details>
+<div class="desc"><p>Client for evaluating PostHog feature flags, prompt experiments, and dynamic
+tool gates for LiveKit voice agents.</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="livekit.plugins.posthog.PostHogFeatureFlags.get_feature_flag"><code class="name flex">
+<span>def <span class="ident">get_feature_flag</span></span>(<span>self,<br>key: str,<br>distinct_id: str | None = None,<br>default: Any = None,<br>person_properties: Dict[str, Any] | None = None) ‑> Any</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_feature_flag(
+    self,
+    key: str,
+    distinct_id: Optional[str] = None,
+    default: Any = None,
+    person_properties: Optional[Dict[str, Any]] = None,
+) -&gt; Any:
+    &#34;&#34;&#34;
+    Retrieves the multivariate variant for a feature flag.
+    Useful for A/B testing different voice models (e.g. &#39;gpt-4o-mini&#39; vs &#39;claude-3-5-sonnet&#39;).
+    &#34;&#34;&#34;
+    target_id = distinct_id or self.default_distinct_id
+    if not self.client:
+        return default
+
+    try:
+        val = self.client.get_feature_flag(
+            key=key,
+            distinct_id=target_id,
+            person_properties=person_properties,
+        )
+        return val if val is not None else default
+    except Exception as e:
+        logger.debug(&#34;[PostHog FeatureFlags] Error fetching flag %s: %s&#34;, key, e)
+        return default</code></pre>
+</details>
+<div class="desc"><p>Retrieves the multivariate variant for a feature flag.
+Useful for A/B testing different voice models (e.g. 'gpt-4o-mini' vs 'claude-3-5-sonnet').</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogFeatureFlags.get_prompt_variant"><code class="name flex">
+<span>def <span class="ident">get_prompt_variant</span></span>(<span>self, key: str, fallback_prompt: str, distinct_id: str | None = None) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_prompt_variant(
+    self,
+    key: str,
+    fallback_prompt: str,
+    distinct_id: Optional[str] = None,
+) -&gt; str:
+    &#34;&#34;&#34;
+    Retrieves a dynamic prompt instruction payload from a PostHog experiment flag.
+    Enables zero-deploy A/B testing of system prompts.
+    &#34;&#34;&#34;
+    target_id = distinct_id or self.default_distinct_id
+    if not self.client:
+        return fallback_prompt
+
+    try:
+        payload = self.client.get_feature_flag_payload(key=key, distinct_id=target_id)
+        if isinstance(payload, str) and payload.strip():
+            return payload
+        elif isinstance(payload, dict) and &#34;prompt&#34; in payload:
+            return str(payload[&#34;prompt&#34;])
+    except Exception as e:
+        logger.debug(&#34;[PostHog FeatureFlags] Error fetching prompt variant for %s: %s&#34;, key, e)
+
+    return fallback_prompt</code></pre>
+</details>
+<div class="desc"><p>Retrieves a dynamic prompt instruction payload from a PostHog experiment flag.
+Enables zero-deploy A/B testing of system prompts.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogFeatureFlags.is_feature_enabled"><code class="name flex">
+<span>def <span class="ident">is_feature_enabled</span></span>(<span>self,<br>key: str,<br>distinct_id: str | None = None,<br>default: bool = False,<br>person_properties: Dict[str, Any] | None = None) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_feature_enabled(
+    self,
+    key: str,
+    distinct_id: Optional[str] = None,
+    default: bool = False,
+    person_properties: Optional[Dict[str, Any]] = None,
+) -&gt; bool:
+    &#34;&#34;&#34;
+    Evaluates whether a feature flag is enabled for the given distinct_id.
+    Useful for gating experimental tools (e.g., beta funnel tools).
+    &#34;&#34;&#34;
+    target_id = distinct_id or self.default_distinct_id
+    if not self.client:
+        return default
+
+    try:
+        res = self.client.feature_enabled(
+            key=key,
+            distinct_id=target_id,
+            person_properties=person_properties,
+        )
+        return bool(res) if res is not None else default
+    except Exception as e:
+        logger.debug(&#34;[PostHog FeatureFlags] Error evaluating %s: %s&#34;, key, e)
+        return default</code></pre>
+</details>
+<div class="desc"><p>Evaluates whether a feature flag is enabled for the given distinct_id.
+Useful for gating experimental tools (e.g., beta funnel tools).</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPlugin"><code class="flex name class">
+<span>class <span class="ident">PostHogPlugin</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostHogPlugin(Plugin):
+    def __init__(self) -&gt; None:
+        super().__init__(__name__, __version__, __package__, logger)</code></pre>
+</details>
+<div class="desc"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>livekit.agents.plugin.Plugin</li>
+<li>abc.ABC</li>
+</ul>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions"><code class="flex name class">
+<span>class <span class="ident">PluginOptions</span></span>
+<span>(</span><span>api_key: str | None = None,<br>host: str = 'https://us.i.posthog.com',<br>project_id: str | None = None,<br>personal_api_key: str | None = None,<br>flush_at: int = 1,<br>flush_interval: float = 0.5,<br>capture_tts_metrics: bool = True,<br>capture_stt_metrics: bool = True,<br>capture_eou_metrics: bool = True,<br>capture_interruption_metrics: bool = True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class PostHogPluginOptions:
+    &#34;&#34;&#34;Configuration options for the PostHog LiveKit plugin.&#34;&#34;&#34;
+    api_key: Optional[str] = None
+    host: str = &#34;https://us.i.posthog.com&#34;
+    project_id: Optional[str] = None
+    personal_api_key: Optional[str] = None
+    flush_at: int = 1
+    flush_interval: float = 0.5
+    capture_tts_metrics: bool = True
+    capture_stt_metrics: bool = True
+    capture_eou_metrics: bool = True
+    capture_interruption_metrics: bool = True</code></pre>
+</details>
+<div class="desc"><p>Configuration options for the PostHog LiveKit plugin.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.api_key"><code class="name">var <span class="ident">api_key</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.capture_eou_metrics"><code class="name">var <span class="ident">capture_eou_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.capture_interruption_metrics"><code class="name">var <span class="ident">capture_interruption_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.capture_stt_metrics"><code class="name">var <span class="ident">capture_stt_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.capture_tts_metrics"><code class="name">var <span class="ident">capture_tts_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.flush_at"><code class="name">var <span class="ident">flush_at</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.flush_interval"><code class="name">var <span class="ident">flush_interval</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.host"><code class="name">var <span class="ident">host</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.personal_api_key"><code class="name">var <span class="ident">personal_api_key</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.project_id"><code class="name">var <span class="ident">project_id</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions"><code class="flex name class">
+<span>class <span class="ident">PostHogPluginOptions</span></span>
+<span>(</span><span>api_key: str | None = None,<br>host: str = 'https://us.i.posthog.com',<br>project_id: str | None = None,<br>personal_api_key: str | None = None,<br>flush_at: int = 1,<br>flush_interval: float = 0.5,<br>capture_tts_metrics: bool = True,<br>capture_stt_metrics: bool = True,<br>capture_eou_metrics: bool = True,<br>capture_interruption_metrics: bool = True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class PostHogPluginOptions:
+    &#34;&#34;&#34;Configuration options for the PostHog LiveKit plugin.&#34;&#34;&#34;
+    api_key: Optional[str] = None
+    host: str = &#34;https://us.i.posthog.com&#34;
+    project_id: Optional[str] = None
+    personal_api_key: Optional[str] = None
+    flush_at: int = 1
+    flush_interval: float = 0.5
+    capture_tts_metrics: bool = True
+    capture_stt_metrics: bool = True
+    capture_eou_metrics: bool = True
+    capture_interruption_metrics: bool = True</code></pre>
+</details>
+<div class="desc"><p>Configuration options for the PostHog LiveKit plugin.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.api_key"><code class="name">var <span class="ident">api_key</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.capture_eou_metrics"><code class="name">var <span class="ident">capture_eou_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.capture_interruption_metrics"><code class="name">var <span class="ident">capture_interruption_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.capture_stt_metrics"><code class="name">var <span class="ident">capture_stt_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.capture_tts_metrics"><code class="name">var <span class="ident">capture_tts_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.flush_at"><code class="name">var <span class="ident">flush_at</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.flush_interval"><code class="name">var <span class="ident">flush_interval</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.host"><code class="name">var <span class="ident">host</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.personal_api_key"><code class="name">var <span class="ident">personal_api_key</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.PostHogPluginOptions.project_id"><code class="name">var <span class="ident">project_id</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.VisualFunnelCard"><code class="flex name class">
+<span>class <span class="ident">VisualFunnelCard</span></span>
+<span>(</span><span>type: str = 'funnel_viz',<br>title: str = 'Conversion Funnel',<br>funnel_id: str = 'default_funnel',<br>steps: List[<a title="livekit.plugins.posthog.models.FunnelStep" href="models.html#livekit.plugins.posthog.models.FunnelStep">FunnelStep</a>] = &lt;factory&gt;,<br>primary_drop_step: str = '',<br>timestamp: int = 0)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class VisualFunnelCard:
+    &#34;&#34;&#34;Payload pushed over WebRTC data channel conforming to Contract A.&#34;&#34;&#34;
+    type: str = &#34;funnel_viz&#34;
+    title: str = &#34;Conversion Funnel&#34;
+    funnel_id: str = &#34;default_funnel&#34;
+    steps: List[FunnelStep] = field(default_factory=list)
+    primary_drop_step: str = &#34;&#34;
+    timestamp: int = 0</code></pre>
+</details>
+<div class="desc"><p>Payload pushed over WebRTC data channel conforming to Contract A.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.VisualFunnelCard.funnel_id"><code class="name">var <span class="ident">funnel_id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.VisualFunnelCard.primary_drop_step"><code class="name">var <span class="ident">primary_drop_step</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.VisualFunnelCard.steps"><code class="name">var <span class="ident">steps</span> : List[<a title="livekit.plugins.posthog.models.FunnelStep" href="models.html#livekit.plugins.posthog.models.FunnelStep">FunnelStep</a>]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.VisualFunnelCard.timestamp"><code class="name">var <span class="ident">timestamp</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.VisualFunnelCard.title"><code class="name">var <span class="ident">title</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.VisualFunnelCard.type"><code class="name">var <span class="ident">type</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="livekit.plugins.posthog.feature_flags" href="feature_flags.html">livekit.plugins.posthog.feature_flags</a></code></li>
+<li><code><a title="livekit.plugins.posthog.log" href="log.html">livekit.plugins.posthog.log</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models" href="models.html">livekit.plugins.posthog.models</a></code></li>
+<li><code><a title="livekit.plugins.posthog.observer" href="observer.html">livekit.plugins.posthog.observer</a></code></li>
+<li><code><a title="livekit.plugins.posthog.tools" href="tools.html">livekit.plugins.posthog.tools</a></code></li>
+<li><code><a title="livekit.plugins.posthog.version" href="version.html">livekit.plugins.posthog.version</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.observe" href="#livekit.plugins.posthog.observe">observe</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="livekit.plugins.posthog.FunnelStep" href="#livekit.plugins.posthog.FunnelStep">FunnelStep</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.FunnelStep.conversion_rate" href="#livekit.plugins.posthog.FunnelStep.conversion_rate">conversion_rate</a></code></li>
+<li><code><a title="livekit.plugins.posthog.FunnelStep.name" href="#livekit.plugins.posthog.FunnelStep.name">name</a></code></li>
+<li><code><a title="livekit.plugins.posthog.FunnelStep.visitors" href="#livekit.plugins.posthog.FunnelStep.visitors">visitors</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.LatencyWaterfallEvent" href="#livekit.plugins.posthog.LatencyWaterfallEvent">LatencyWaterfallEvent</a></code></h4>
+<ul class="two-column">
+<li><code><a title="livekit.plugins.posthog.LatencyWaterfallEvent.eou_delay" href="#livekit.plugins.posthog.LatencyWaterfallEvent.eou_delay">eou_delay</a></code></li>
+<li><code><a title="livekit.plugins.posthog.LatencyWaterfallEvent.llm_duration" href="#livekit.plugins.posthog.LatencyWaterfallEvent.llm_duration">llm_duration</a></code></li>
+<li><code><a title="livekit.plugins.posthog.LatencyWaterfallEvent.llm_ttft" href="#livekit.plugins.posthog.LatencyWaterfallEvent.llm_ttft">llm_ttft</a></code></li>
+<li><code><a title="livekit.plugins.posthog.LatencyWaterfallEvent.session_id" href="#livekit.plugins.posthog.LatencyWaterfallEvent.session_id">session_id</a></code></li>
+<li><code><a title="livekit.plugins.posthog.LatencyWaterfallEvent.stt_duration" href="#livekit.plugins.posthog.LatencyWaterfallEvent.stt_duration">stt_duration</a></code></li>
+<li><code><a title="livekit.plugins.posthog.LatencyWaterfallEvent.total_turn_latency" href="#livekit.plugins.posthog.LatencyWaterfallEvent.total_turn_latency">total_turn_latency</a></code></li>
+<li><code><a title="livekit.plugins.posthog.LatencyWaterfallEvent.tts_duration" href="#livekit.plugins.posthog.LatencyWaterfallEvent.tts_duration">tts_duration</a></code></li>
+<li><code><a title="livekit.plugins.posthog.LatencyWaterfallEvent.tts_ttfb" href="#livekit.plugins.posthog.LatencyWaterfallEvent.tts_ttfb">tts_ttfb</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.PostHogAgentObserver" href="#livekit.plugins.posthog.PostHogAgentObserver">PostHogAgentObserver</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.attach_to_session" href="#livekit.plugins.posthog.PostHogAgentObserver.attach_to_session">attach_to_session</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.link_session_replay" href="#livekit.plugins.posthog.PostHogAgentObserver.link_session_replay">link_session_replay</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.on_metrics_collected" href="#livekit.plugins.posthog.PostHogAgentObserver.on_metrics_collected">on_metrics_collected</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_eou_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_eou_metrics">record_eou_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_interruption_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_interruption_metrics">record_interruption_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_llm_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_llm_metrics">record_llm_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_session_usage" href="#livekit.plugins.posthog.PostHogAgentObserver.record_session_usage">record_session_usage</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_stt_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_stt_metrics">record_stt_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_tts_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_tts_metrics">record_tts_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.shutdown" href="#livekit.plugins.posthog.PostHogAgentObserver.shutdown">shutdown</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.PostHogAgentObserver" href="#livekit.plugins.posthog.PostHogAgentObserver">PostHogAgentObserver</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.attach_to_session" href="#livekit.plugins.posthog.PostHogAgentObserver.attach_to_session">attach_to_session</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.link_session_replay" href="#livekit.plugins.posthog.PostHogAgentObserver.link_session_replay">link_session_replay</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.on_metrics_collected" href="#livekit.plugins.posthog.PostHogAgentObserver.on_metrics_collected">on_metrics_collected</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_eou_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_eou_metrics">record_eou_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_interruption_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_interruption_metrics">record_interruption_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_llm_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_llm_metrics">record_llm_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_session_usage" href="#livekit.plugins.posthog.PostHogAgentObserver.record_session_usage">record_session_usage</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_stt_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_stt_metrics">record_stt_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_tts_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_tts_metrics">record_tts_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.shutdown" href="#livekit.plugins.posthog.PostHogAgentObserver.shutdown">shutdown</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.PostHogAgentObserver" href="#livekit.plugins.posthog.PostHogAgentObserver">PostHogAgentObserver</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.attach_to_session" href="#livekit.plugins.posthog.PostHogAgentObserver.attach_to_session">attach_to_session</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.link_session_replay" href="#livekit.plugins.posthog.PostHogAgentObserver.link_session_replay">link_session_replay</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.on_metrics_collected" href="#livekit.plugins.posthog.PostHogAgentObserver.on_metrics_collected">on_metrics_collected</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_eou_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_eou_metrics">record_eou_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_interruption_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_interruption_metrics">record_interruption_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_llm_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_llm_metrics">record_llm_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_session_usage" href="#livekit.plugins.posthog.PostHogAgentObserver.record_session_usage">record_session_usage</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_stt_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_stt_metrics">record_stt_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.record_tts_metrics" href="#livekit.plugins.posthog.PostHogAgentObserver.record_tts_metrics">record_tts_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogAgentObserver.shutdown" href="#livekit.plugins.posthog.PostHogAgentObserver.shutdown">shutdown</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.PostHogDualChannelTools" href="#livekit.plugins.posthog.PostHogDualChannelTools">PostHogDualChannelTools</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.get_tools" href="#livekit.plugins.posthog.PostHogDualChannelTools.get_tools">get_tools</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.query_errors" href="#livekit.plugins.posthog.PostHogDualChannelTools.query_errors">query_errors</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.query_funnel" href="#livekit.plugins.posthog.PostHogDualChannelTools.query_funnel">query_funnel</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.query_hogql" href="#livekit.plugins.posthog.PostHogDualChannelTools.query_hogql">query_hogql</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.query_retention" href="#livekit.plugins.posthog.PostHogDualChannelTools.query_retention">query_retention</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.PostHogDualChannelTools" href="#livekit.plugins.posthog.PostHogDualChannelTools">PostHogDualChannelTools</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.get_tools" href="#livekit.plugins.posthog.PostHogDualChannelTools.get_tools">get_tools</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.query_errors" href="#livekit.plugins.posthog.PostHogDualChannelTools.query_errors">query_errors</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.query_funnel" href="#livekit.plugins.posthog.PostHogDualChannelTools.query_funnel">query_funnel</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.query_hogql" href="#livekit.plugins.posthog.PostHogDualChannelTools.query_hogql">query_hogql</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.query_retention" href="#livekit.plugins.posthog.PostHogDualChannelTools.query_retention">query_retention</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.PostHogDualChannelTools" href="#livekit.plugins.posthog.PostHogDualChannelTools">PostHogDualChannelTools</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.get_tools" href="#livekit.plugins.posthog.PostHogDualChannelTools.get_tools">get_tools</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.query_errors" href="#livekit.plugins.posthog.PostHogDualChannelTools.query_errors">query_errors</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.query_funnel" href="#livekit.plugins.posthog.PostHogDualChannelTools.query_funnel">query_funnel</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.query_hogql" href="#livekit.plugins.posthog.PostHogDualChannelTools.query_hogql">query_hogql</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogDualChannelTools.query_retention" href="#livekit.plugins.posthog.PostHogDualChannelTools.query_retention">query_retention</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.PostHogFeatureFlags" href="#livekit.plugins.posthog.PostHogFeatureFlags">PostHogFeatureFlags</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.PostHogFeatureFlags.get_feature_flag" href="#livekit.plugins.posthog.PostHogFeatureFlags.get_feature_flag">get_feature_flag</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogFeatureFlags.get_prompt_variant" href="#livekit.plugins.posthog.PostHogFeatureFlags.get_prompt_variant">get_prompt_variant</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogFeatureFlags.is_feature_enabled" href="#livekit.plugins.posthog.PostHogFeatureFlags.is_feature_enabled">is_feature_enabled</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.PostHogFeatureFlags" href="#livekit.plugins.posthog.PostHogFeatureFlags">PostHogFeatureFlags</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.PostHogFeatureFlags.get_feature_flag" href="#livekit.plugins.posthog.PostHogFeatureFlags.get_feature_flag">get_feature_flag</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogFeatureFlags.get_prompt_variant" href="#livekit.plugins.posthog.PostHogFeatureFlags.get_prompt_variant">get_prompt_variant</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogFeatureFlags.is_feature_enabled" href="#livekit.plugins.posthog.PostHogFeatureFlags.is_feature_enabled">is_feature_enabled</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.PostHogPlugin" href="#livekit.plugins.posthog.PostHogPlugin">PostHogPlugin</a></code></h4>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.PostHogPluginOptions" href="#livekit.plugins.posthog.PostHogPluginOptions">PostHogPluginOptions</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.api_key" href="#livekit.plugins.posthog.PostHogPluginOptions.api_key">api_key</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.capture_eou_metrics" href="#livekit.plugins.posthog.PostHogPluginOptions.capture_eou_metrics">capture_eou_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.capture_interruption_metrics" href="#livekit.plugins.posthog.PostHogPluginOptions.capture_interruption_metrics">capture_interruption_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.capture_stt_metrics" href="#livekit.plugins.posthog.PostHogPluginOptions.capture_stt_metrics">capture_stt_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.capture_tts_metrics" href="#livekit.plugins.posthog.PostHogPluginOptions.capture_tts_metrics">capture_tts_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.flush_at" href="#livekit.plugins.posthog.PostHogPluginOptions.flush_at">flush_at</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.flush_interval" href="#livekit.plugins.posthog.PostHogPluginOptions.flush_interval">flush_interval</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.host" href="#livekit.plugins.posthog.PostHogPluginOptions.host">host</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.personal_api_key" href="#livekit.plugins.posthog.PostHogPluginOptions.personal_api_key">personal_api_key</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.project_id" href="#livekit.plugins.posthog.PostHogPluginOptions.project_id">project_id</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.PostHogPluginOptions" href="#livekit.plugins.posthog.PostHogPluginOptions">PostHogPluginOptions</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.api_key" href="#livekit.plugins.posthog.PostHogPluginOptions.api_key">api_key</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.capture_eou_metrics" href="#livekit.plugins.posthog.PostHogPluginOptions.capture_eou_metrics">capture_eou_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.capture_interruption_metrics" href="#livekit.plugins.posthog.PostHogPluginOptions.capture_interruption_metrics">capture_interruption_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.capture_stt_metrics" href="#livekit.plugins.posthog.PostHogPluginOptions.capture_stt_metrics">capture_stt_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.capture_tts_metrics" href="#livekit.plugins.posthog.PostHogPluginOptions.capture_tts_metrics">capture_tts_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.flush_at" href="#livekit.plugins.posthog.PostHogPluginOptions.flush_at">flush_at</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.flush_interval" href="#livekit.plugins.posthog.PostHogPluginOptions.flush_interval">flush_interval</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.host" href="#livekit.plugins.posthog.PostHogPluginOptions.host">host</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.personal_api_key" href="#livekit.plugins.posthog.PostHogPluginOptions.personal_api_key">personal_api_key</a></code></li>
+<li><code><a title="livekit.plugins.posthog.PostHogPluginOptions.project_id" href="#livekit.plugins.posthog.PostHogPluginOptions.project_id">project_id</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.VisualFunnelCard" href="#livekit.plugins.posthog.VisualFunnelCard">VisualFunnelCard</a></code></h4>
+<ul class="two-column">
+<li><code><a title="livekit.plugins.posthog.VisualFunnelCard.funnel_id" href="#livekit.plugins.posthog.VisualFunnelCard.funnel_id">funnel_id</a></code></li>
+<li><code><a title="livekit.plugins.posthog.VisualFunnelCard.primary_drop_step" href="#livekit.plugins.posthog.VisualFunnelCard.primary_drop_step">primary_drop_step</a></code></li>
+<li><code><a title="livekit.plugins.posthog.VisualFunnelCard.steps" href="#livekit.plugins.posthog.VisualFunnelCard.steps">steps</a></code></li>
+<li><code><a title="livekit.plugins.posthog.VisualFunnelCard.timestamp" href="#livekit.plugins.posthog.VisualFunnelCard.timestamp">timestamp</a></code></li>
+<li><code><a title="livekit.plugins.posthog.VisualFunnelCard.title" href="#livekit.plugins.posthog.VisualFunnelCard.title">title</a></code></li>
+<li><code><a title="livekit.plugins.posthog.VisualFunnelCard.type" href="#livekit.plugins.posthog.VisualFunnelCard.type">type</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

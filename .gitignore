@@ -1,0 +1,16 @@
+# Virtual environments & cache
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local configuration & environment files
+.env
+*.log
+
+# Compiled Go binaries
+prism-gateway
+bin/prism-gateway
+
+# Local plugin symlink (source managed in livekit-agents monorepo)
+plugins/livekit-plugins-posthog

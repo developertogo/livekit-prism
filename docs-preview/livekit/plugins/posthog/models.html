@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>livekit.plugins.posthog.models API documentation</title>
+<meta name="description" content="Data contracts, event models, and configuration types for livekit-plugins-posthog.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>livekit.plugins.posthog.models</code></h1>
+</header>
+<section id="section-intro">
+<p>Data contracts, event models, and configuration types for livekit-plugins-posthog.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="livekit.plugins.posthog.models.ErrorWaterfallStep"><code class="flex name class">
+<span>class <span class="ident">ErrorWaterfallStep</span></span>
+<span>(</span><span>error_type: str, count: int, percentage: float, status_code: int)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class ErrorWaterfallStep:
+    &#34;&#34;&#34;A single error category in the Error Waterfall card.&#34;&#34;&#34;
+    error_type: str
+    count: int
+    percentage: float
+    status_code: int</code></pre>
+</details>
+<div class="desc"><p>A single error category in the Error Waterfall card.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.models.ErrorWaterfallStep.count"><code class="name">var <span class="ident">count</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.ErrorWaterfallStep.error_type"><code class="name">var <span class="ident">error_type</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.ErrorWaterfallStep.percentage"><code class="name">var <span class="ident">percentage</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.ErrorWaterfallStep.status_code"><code class="name">var <span class="ident">status_code</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.models.FunnelStep"><code class="flex name class">
+<span>class <span class="ident">FunnelStep</span></span>
+<span>(</span><span>name: str, visitors: int, conversion_rate: float)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class FunnelStep:
+    &#34;&#34;&#34;A discrete step in a PostHog conversion funnel.&#34;&#34;&#34;
+    name: str
+    visitors: int
+    conversion_rate: float</code></pre>
+</details>
+<div class="desc"><p>A discrete step in a PostHog conversion funnel.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.models.FunnelStep.conversion_rate"><code class="name">var <span class="ident">conversion_rate</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.FunnelStep.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.FunnelStep.visitors"><code class="name">var <span class="ident">visitors</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.models.LatencyWaterfallEvent"><code class="flex name class">
+<span>class <span class="ident">LatencyWaterfallEvent</span></span>
+<span>(</span><span>session_id: str,<br>stt_duration: float = 0.0,<br>eou_delay: float = 0.0,<br>llm_ttft: float = 0.0,<br>llm_duration: float = 0.0,<br>tts_ttfb: float = 0.0,<br>tts_duration: float = 0.0,<br>total_turn_latency: float = 0.0)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class LatencyWaterfallEvent:
+    &#34;&#34;&#34;Full turn latency waterfall emitted to PostHog for conversational performance analysis.&#34;&#34;&#34;
+    session_id: str
+    stt_duration: float = 0.0
+    eou_delay: float = 0.0
+    llm_ttft: float = 0.0
+    llm_duration: float = 0.0
+    tts_ttfb: float = 0.0
+    tts_duration: float = 0.0
+    total_turn_latency: float = 0.0</code></pre>
+</details>
+<div class="desc"><p>Full turn latency waterfall emitted to PostHog for conversational performance analysis.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.models.LatencyWaterfallEvent.eou_delay"><code class="name">var <span class="ident">eou_delay</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.LatencyWaterfallEvent.llm_duration"><code class="name">var <span class="ident">llm_duration</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.LatencyWaterfallEvent.llm_ttft"><code class="name">var <span class="ident">llm_ttft</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.LatencyWaterfallEvent.session_id"><code class="name">var <span class="ident">session_id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.LatencyWaterfallEvent.stt_duration"><code class="name">var <span class="ident">stt_duration</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.LatencyWaterfallEvent.total_turn_latency"><code class="name">var <span class="ident">total_turn_latency</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.LatencyWaterfallEvent.tts_duration"><code class="name">var <span class="ident">tts_duration</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.LatencyWaterfallEvent.tts_ttfb"><code class="name">var <span class="ident">tts_ttfb</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions"><code class="flex name class">
+<span>class <span class="ident">PostHogPluginOptions</span></span>
+<span>(</span><span>api_key: str | None = None,<br>host: str = 'https://us.i.posthog.com',<br>project_id: str | None = None,<br>personal_api_key: str | None = None,<br>flush_at: int = 1,<br>flush_interval: float = 0.5,<br>capture_tts_metrics: bool = True,<br>capture_stt_metrics: bool = True,<br>capture_eou_metrics: bool = True,<br>capture_interruption_metrics: bool = True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class PostHogPluginOptions:
+    &#34;&#34;&#34;Configuration options for the PostHog LiveKit plugin.&#34;&#34;&#34;
+    api_key: Optional[str] = None
+    host: str = &#34;https://us.i.posthog.com&#34;
+    project_id: Optional[str] = None
+    personal_api_key: Optional[str] = None
+    flush_at: int = 1
+    flush_interval: float = 0.5
+    capture_tts_metrics: bool = True
+    capture_stt_metrics: bool = True
+    capture_eou_metrics: bool = True
+    capture_interruption_metrics: bool = True</code></pre>
+</details>
+<div class="desc"><p>Configuration options for the PostHog LiveKit plugin.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.api_key"><code class="name">var <span class="ident">api_key</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.capture_eou_metrics"><code class="name">var <span class="ident">capture_eou_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.capture_interruption_metrics"><code class="name">var <span class="ident">capture_interruption_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.capture_stt_metrics"><code class="name">var <span class="ident">capture_stt_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.capture_tts_metrics"><code class="name">var <span class="ident">capture_tts_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.flush_at"><code class="name">var <span class="ident">flush_at</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.flush_interval"><code class="name">var <span class="ident">flush_interval</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.host"><code class="name">var <span class="ident">host</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.personal_api_key"><code class="name">var <span class="ident">personal_api_key</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.project_id"><code class="name">var <span class="ident">project_id</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions"><code class="flex name class">
+<span>class <span class="ident">PluginOptions</span></span>
+<span>(</span><span>api_key: str | None = None,<br>host: str = 'https://us.i.posthog.com',<br>project_id: str | None = None,<br>personal_api_key: str | None = None,<br>flush_at: int = 1,<br>flush_interval: float = 0.5,<br>capture_tts_metrics: bool = True,<br>capture_stt_metrics: bool = True,<br>capture_eou_metrics: bool = True,<br>capture_interruption_metrics: bool = True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class PostHogPluginOptions:
+    &#34;&#34;&#34;Configuration options for the PostHog LiveKit plugin.&#34;&#34;&#34;
+    api_key: Optional[str] = None
+    host: str = &#34;https://us.i.posthog.com&#34;
+    project_id: Optional[str] = None
+    personal_api_key: Optional[str] = None
+    flush_at: int = 1
+    flush_interval: float = 0.5
+    capture_tts_metrics: bool = True
+    capture_stt_metrics: bool = True
+    capture_eou_metrics: bool = True
+    capture_interruption_metrics: bool = True</code></pre>
+</details>
+<div class="desc"><p>Configuration options for the PostHog LiveKit plugin.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.api_key"><code class="name">var <span class="ident">api_key</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.capture_eou_metrics"><code class="name">var <span class="ident">capture_eou_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.capture_interruption_metrics"><code class="name">var <span class="ident">capture_interruption_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.capture_stt_metrics"><code class="name">var <span class="ident">capture_stt_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.capture_tts_metrics"><code class="name">var <span class="ident">capture_tts_metrics</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.flush_at"><code class="name">var <span class="ident">flush_at</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.flush_interval"><code class="name">var <span class="ident">flush_interval</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.host"><code class="name">var <span class="ident">host</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.personal_api_key"><code class="name">var <span class="ident">personal_api_key</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.PostHogPluginOptions.project_id"><code class="name">var <span class="ident">project_id</span> : str | None</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.models.RetentionStep"><code class="flex name class">
+<span>class <span class="ident">RetentionStep</span></span>
+<span>(</span><span>interval: str, retention_rate: float, users: int)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class RetentionStep:
+    &#34;&#34;&#34;A cohort interval in the Retention Trend card.&#34;&#34;&#34;
+    interval: str
+    retention_rate: float
+    users: int</code></pre>
+</details>
+<div class="desc"><p>A cohort interval in the Retention Trend card.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.models.RetentionStep.interval"><code class="name">var <span class="ident">interval</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.RetentionStep.retention_rate"><code class="name">var <span class="ident">retention_rate</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.RetentionStep.users"><code class="name">var <span class="ident">users</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.models.SessionReplayLinkEvent"><code class="flex name class">
+<span>class <span class="ident">SessionReplayLinkEvent</span></span>
+<span>(</span><span>session_id: str,<br>livekit_room: str,<br>participant_identity: str,<br>replay_url: str,<br>timestamp: float = 0.0)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class SessionReplayLinkEvent:
+    &#34;&#34;&#34;Event linking LiveKit WebRTC session recording to PostHog Session Replay.&#34;&#34;&#34;
+    session_id: str
+    livekit_room: str
+    participant_identity: str
+    replay_url: str
+    timestamp: float = 0.0</code></pre>
+</details>
+<div class="desc"><p>Event linking LiveKit WebRTC session recording to PostHog Session Replay.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.models.SessionReplayLinkEvent.livekit_room"><code class="name">var <span class="ident">livekit_room</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.SessionReplayLinkEvent.participant_identity"><code class="name">var <span class="ident">participant_identity</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.SessionReplayLinkEvent.replay_url"><code class="name">var <span class="ident">replay_url</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.SessionReplayLinkEvent.session_id"><code class="name">var <span class="ident">session_id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.SessionReplayLinkEvent.timestamp"><code class="name">var <span class="ident">timestamp</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualErrorWaterfallCard"><code class="flex name class">
+<span>class <span class="ident">VisualErrorWaterfallCard</span></span>
+<span>(</span><span>type: str = 'error_waterfall',<br>title: str = 'API Error Waterfall',<br>timeframe: str = '24h',<br>total_errors: int = 0,<br>errors: List[<a title="livekit.plugins.posthog.models.ErrorWaterfallStep" href="#livekit.plugins.posthog.models.ErrorWaterfallStep">ErrorWaterfallStep</a>] = &lt;factory&gt;,<br>primary_root_cause: str = '',<br>timestamp: int = 0)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class VisualErrorWaterfallCard:
+    &#34;&#34;&#34;Payload pushed over WebRTC data channel for error triaging.&#34;&#34;&#34;
+    type: str = &#34;error_waterfall&#34;
+    title: str = &#34;API Error Waterfall&#34;
+    timeframe: str = &#34;24h&#34;
+    total_errors: int = 0
+    errors: List[ErrorWaterfallStep] = field(default_factory=list)
+    primary_root_cause: str = &#34;&#34;
+    timestamp: int = 0</code></pre>
+</details>
+<div class="desc"><p>Payload pushed over WebRTC data channel for error triaging.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.models.VisualErrorWaterfallCard.errors"><code class="name">var <span class="ident">errors</span> : List[<a title="livekit.plugins.posthog.models.ErrorWaterfallStep" href="#livekit.plugins.posthog.models.ErrorWaterfallStep">ErrorWaterfallStep</a>]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualErrorWaterfallCard.primary_root_cause"><code class="name">var <span class="ident">primary_root_cause</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualErrorWaterfallCard.timeframe"><code class="name">var <span class="ident">timeframe</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualErrorWaterfallCard.timestamp"><code class="name">var <span class="ident">timestamp</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualErrorWaterfallCard.title"><code class="name">var <span class="ident">title</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualErrorWaterfallCard.total_errors"><code class="name">var <span class="ident">total_errors</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualErrorWaterfallCard.type"><code class="name">var <span class="ident">type</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualFunnelCard"><code class="flex name class">
+<span>class <span class="ident">VisualFunnelCard</span></span>
+<span>(</span><span>type: str = 'funnel_viz',<br>title: str = 'Conversion Funnel',<br>funnel_id: str = 'default_funnel',<br>steps: List[<a title="livekit.plugins.posthog.models.FunnelStep" href="#livekit.plugins.posthog.models.FunnelStep">FunnelStep</a>] = &lt;factory&gt;,<br>primary_drop_step: str = '',<br>timestamp: int = 0)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class VisualFunnelCard:
+    &#34;&#34;&#34;Payload pushed over WebRTC data channel conforming to Contract A.&#34;&#34;&#34;
+    type: str = &#34;funnel_viz&#34;
+    title: str = &#34;Conversion Funnel&#34;
+    funnel_id: str = &#34;default_funnel&#34;
+    steps: List[FunnelStep] = field(default_factory=list)
+    primary_drop_step: str = &#34;&#34;
+    timestamp: int = 0</code></pre>
+</details>
+<div class="desc"><p>Payload pushed over WebRTC data channel conforming to Contract A.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.models.VisualFunnelCard.funnel_id"><code class="name">var <span class="ident">funnel_id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualFunnelCard.primary_drop_step"><code class="name">var <span class="ident">primary_drop_step</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualFunnelCard.steps"><code class="name">var <span class="ident">steps</span> : List[<a title="livekit.plugins.posthog.models.FunnelStep" href="#livekit.plugins.posthog.models.FunnelStep">FunnelStep</a>]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualFunnelCard.timestamp"><code class="name">var <span class="ident">timestamp</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualFunnelCard.title"><code class="name">var <span class="ident">title</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualFunnelCard.type"><code class="name">var <span class="ident">type</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualRetentionCard"><code class="flex name class">
+<span>class <span class="ident">VisualRetentionCard</span></span>
+<span>(</span><span>type: str = 'retention_trend',<br>title: str = 'Cohort Retention Trend',<br>cohort_name: str = 'All Users',<br>intervals: List[<a title="livekit.plugins.posthog.models.RetentionStep" href="#livekit.plugins.posthog.models.RetentionStep">RetentionStep</a>] = &lt;factory&gt;,<br>terminal_retention: float = 0.0,<br>timestamp: int = 0)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class VisualRetentionCard:
+    &#34;&#34;&#34;Payload pushed over WebRTC data channel for cohort retention analysis.&#34;&#34;&#34;
+    type: str = &#34;retention_trend&#34;
+    title: str = &#34;Cohort Retention Trend&#34;
+    cohort_name: str = &#34;All Users&#34;
+    intervals: List[RetentionStep] = field(default_factory=list)
+    terminal_retention: float = 0.0
+    timestamp: int = 0</code></pre>
+</details>
+<div class="desc"><p>Payload pushed over WebRTC data channel for cohort retention analysis.</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="livekit.plugins.posthog.models.VisualRetentionCard.cohort_name"><code class="name">var <span class="ident">cohort_name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualRetentionCard.intervals"><code class="name">var <span class="ident">intervals</span> : List[<a title="livekit.plugins.posthog.models.RetentionStep" href="#livekit.plugins.posthog.models.RetentionStep">RetentionStep</a>]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualRetentionCard.terminal_retention"><code class="name">var <span class="ident">terminal_retention</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualRetentionCard.timestamp"><code class="name">var <span class="ident">timestamp</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualRetentionCard.title"><code class="name">var <span class="ident">title</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="livekit.plugins.posthog.models.VisualRetentionCard.type"><code class="name">var <span class="ident">type</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="livekit.plugins.posthog" href="index.html">livekit.plugins.posthog</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="livekit.plugins.posthog.models.ErrorWaterfallStep" href="#livekit.plugins.posthog.models.ErrorWaterfallStep">ErrorWaterfallStep</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.models.ErrorWaterfallStep.count" href="#livekit.plugins.posthog.models.ErrorWaterfallStep.count">count</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.ErrorWaterfallStep.error_type" href="#livekit.plugins.posthog.models.ErrorWaterfallStep.error_type">error_type</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.ErrorWaterfallStep.percentage" href="#livekit.plugins.posthog.models.ErrorWaterfallStep.percentage">percentage</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.ErrorWaterfallStep.status_code" href="#livekit.plugins.posthog.models.ErrorWaterfallStep.status_code">status_code</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.models.FunnelStep" href="#livekit.plugins.posthog.models.FunnelStep">FunnelStep</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.models.FunnelStep.conversion_rate" href="#livekit.plugins.posthog.models.FunnelStep.conversion_rate">conversion_rate</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.FunnelStep.name" href="#livekit.plugins.posthog.models.FunnelStep.name">name</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.FunnelStep.visitors" href="#livekit.plugins.posthog.models.FunnelStep.visitors">visitors</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.models.LatencyWaterfallEvent" href="#livekit.plugins.posthog.models.LatencyWaterfallEvent">LatencyWaterfallEvent</a></code></h4>
+<ul class="two-column">
+<li><code><a title="livekit.plugins.posthog.models.LatencyWaterfallEvent.eou_delay" href="#livekit.plugins.posthog.models.LatencyWaterfallEvent.eou_delay">eou_delay</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.LatencyWaterfallEvent.llm_duration" href="#livekit.plugins.posthog.models.LatencyWaterfallEvent.llm_duration">llm_duration</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.LatencyWaterfallEvent.llm_ttft" href="#livekit.plugins.posthog.models.LatencyWaterfallEvent.llm_ttft">llm_ttft</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.LatencyWaterfallEvent.session_id" href="#livekit.plugins.posthog.models.LatencyWaterfallEvent.session_id">session_id</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.LatencyWaterfallEvent.stt_duration" href="#livekit.plugins.posthog.models.LatencyWaterfallEvent.stt_duration">stt_duration</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.LatencyWaterfallEvent.total_turn_latency" href="#livekit.plugins.posthog.models.LatencyWaterfallEvent.total_turn_latency">total_turn_latency</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.LatencyWaterfallEvent.tts_duration" href="#livekit.plugins.posthog.models.LatencyWaterfallEvent.tts_duration">tts_duration</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.LatencyWaterfallEvent.tts_ttfb" href="#livekit.plugins.posthog.models.LatencyWaterfallEvent.tts_ttfb">tts_ttfb</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions" href="#livekit.plugins.posthog.models.PostHogPluginOptions">PostHogPluginOptions</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.api_key" href="#livekit.plugins.posthog.models.PostHogPluginOptions.api_key">api_key</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.capture_eou_metrics" href="#livekit.plugins.posthog.models.PostHogPluginOptions.capture_eou_metrics">capture_eou_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.capture_interruption_metrics" href="#livekit.plugins.posthog.models.PostHogPluginOptions.capture_interruption_metrics">capture_interruption_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.capture_stt_metrics" href="#livekit.plugins.posthog.models.PostHogPluginOptions.capture_stt_metrics">capture_stt_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.capture_tts_metrics" href="#livekit.plugins.posthog.models.PostHogPluginOptions.capture_tts_metrics">capture_tts_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.flush_at" href="#livekit.plugins.posthog.models.PostHogPluginOptions.flush_at">flush_at</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.flush_interval" href="#livekit.plugins.posthog.models.PostHogPluginOptions.flush_interval">flush_interval</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.host" href="#livekit.plugins.posthog.models.PostHogPluginOptions.host">host</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.personal_api_key" href="#livekit.plugins.posthog.models.PostHogPluginOptions.personal_api_key">personal_api_key</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.project_id" href="#livekit.plugins.posthog.models.PostHogPluginOptions.project_id">project_id</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions" href="#livekit.plugins.posthog.models.PostHogPluginOptions">PostHogPluginOptions</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.api_key" href="#livekit.plugins.posthog.models.PostHogPluginOptions.api_key">api_key</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.capture_eou_metrics" href="#livekit.plugins.posthog.models.PostHogPluginOptions.capture_eou_metrics">capture_eou_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.capture_interruption_metrics" href="#livekit.plugins.posthog.models.PostHogPluginOptions.capture_interruption_metrics">capture_interruption_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.capture_stt_metrics" href="#livekit.plugins.posthog.models.PostHogPluginOptions.capture_stt_metrics">capture_stt_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.capture_tts_metrics" href="#livekit.plugins.posthog.models.PostHogPluginOptions.capture_tts_metrics">capture_tts_metrics</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.flush_at" href="#livekit.plugins.posthog.models.PostHogPluginOptions.flush_at">flush_at</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.flush_interval" href="#livekit.plugins.posthog.models.PostHogPluginOptions.flush_interval">flush_interval</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.host" href="#livekit.plugins.posthog.models.PostHogPluginOptions.host">host</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.personal_api_key" href="#livekit.plugins.posthog.models.PostHogPluginOptions.personal_api_key">personal_api_key</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.PostHogPluginOptions.project_id" href="#livekit.plugins.posthog.models.PostHogPluginOptions.project_id">project_id</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.models.RetentionStep" href="#livekit.plugins.posthog.models.RetentionStep">RetentionStep</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.models.RetentionStep.interval" href="#livekit.plugins.posthog.models.RetentionStep.interval">interval</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.RetentionStep.retention_rate" href="#livekit.plugins.posthog.models.RetentionStep.retention_rate">retention_rate</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.RetentionStep.users" href="#livekit.plugins.posthog.models.RetentionStep.users">users</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.models.SessionReplayLinkEvent" href="#livekit.plugins.posthog.models.SessionReplayLinkEvent">SessionReplayLinkEvent</a></code></h4>
+<ul class="">
+<li><code><a title="livekit.plugins.posthog.models.SessionReplayLinkEvent.livekit_room" href="#livekit.plugins.posthog.models.SessionReplayLinkEvent.livekit_room">livekit_room</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.SessionReplayLinkEvent.participant_identity" href="#livekit.plugins.posthog.models.SessionReplayLinkEvent.participant_identity">participant_identity</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.SessionReplayLinkEvent.replay_url" href="#livekit.plugins.posthog.models.SessionReplayLinkEvent.replay_url">replay_url</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.SessionReplayLinkEvent.session_id" href="#livekit.plugins.posthog.models.SessionReplayLinkEvent.session_id">session_id</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.SessionReplayLinkEvent.timestamp" href="#livekit.plugins.posthog.models.SessionReplayLinkEvent.timestamp">timestamp</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.models.VisualErrorWaterfallCard" href="#livekit.plugins.posthog.models.VisualErrorWaterfallCard">VisualErrorWaterfallCard</a></code></h4>
+<ul class="two-column">
+<li><code><a title="livekit.plugins.posthog.models.VisualErrorWaterfallCard.errors" href="#livekit.plugins.posthog.models.VisualErrorWaterfallCard.errors">errors</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualErrorWaterfallCard.primary_root_cause" href="#livekit.plugins.posthog.models.VisualErrorWaterfallCard.primary_root_cause">primary_root_cause</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualErrorWaterfallCard.timeframe" href="#livekit.plugins.posthog.models.VisualErrorWaterfallCard.timeframe">timeframe</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualErrorWaterfallCard.timestamp" href="#livekit.plugins.posthog.models.VisualErrorWaterfallCard.timestamp">timestamp</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualErrorWaterfallCard.title" href="#livekit.plugins.posthog.models.VisualErrorWaterfallCard.title">title</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualErrorWaterfallCard.total_errors" href="#livekit.plugins.posthog.models.VisualErrorWaterfallCard.total_errors">total_errors</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualErrorWaterfallCard.type" href="#livekit.plugins.posthog.models.VisualErrorWaterfallCard.type">type</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.models.VisualFunnelCard" href="#livekit.plugins.posthog.models.VisualFunnelCard">VisualFunnelCard</a></code></h4>
+<ul class="two-column">
+<li><code><a title="livekit.plugins.posthog.models.VisualFunnelCard.funnel_id" href="#livekit.plugins.posthog.models.VisualFunnelCard.funnel_id">funnel_id</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualFunnelCard.primary_drop_step" href="#livekit.plugins.posthog.models.VisualFunnelCard.primary_drop_step">primary_drop_step</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualFunnelCard.steps" href="#livekit.plugins.posthog.models.VisualFunnelCard.steps">steps</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualFunnelCard.timestamp" href="#livekit.plugins.posthog.models.VisualFunnelCard.timestamp">timestamp</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualFunnelCard.title" href="#livekit.plugins.posthog.models.VisualFunnelCard.title">title</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualFunnelCard.type" href="#livekit.plugins.posthog.models.VisualFunnelCard.type">type</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="livekit.plugins.posthog.models.VisualRetentionCard" href="#livekit.plugins.posthog.models.VisualRetentionCard">VisualRetentionCard</a></code></h4>
+<ul class="two-column">
+<li><code><a title="livekit.plugins.posthog.models.VisualRetentionCard.cohort_name" href="#livekit.plugins.posthog.models.VisualRetentionCard.cohort_name">cohort_name</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualRetentionCard.intervals" href="#livekit.plugins.posthog.models.VisualRetentionCard.intervals">intervals</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualRetentionCard.terminal_retention" href="#livekit.plugins.posthog.models.VisualRetentionCard.terminal_retention">terminal_retention</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualRetentionCard.timestamp" href="#livekit.plugins.posthog.models.VisualRetentionCard.timestamp">timestamp</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualRetentionCard.title" href="#livekit.plugins.posthog.models.VisualRetentionCard.title">title</a></code></li>
+<li><code><a title="livekit.plugins.posthog.models.VisualRetentionCard.type" href="#livekit.plugins.posthog.models.VisualRetentionCard.type">type</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prism | Multimodal Voice & Telemetry Gateway</title>
+  <script src="https://cdn.jsdelivr.net/npm/livekit-client/dist/livekit-client.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-posthog: #f54e00;
+      --text: #f9fafb;
+      --text-muted: #9ca3af;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #3b82f6, #ec4899, #f54e00);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-left: 0.5rem;
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.825rem;
+      font-weight: 500;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-muted);
+    }
+
+    .status-dot.connected {
+      background: var(--success);
+      box-shadow: 0 0 8px var(--success);
+    }
+
+    .status-dot.connecting {
+      background: var(--warning);
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 2rem;
+      max-width: 1600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .audio-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 90px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      margin-top: 1rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px dashed var(--border);
+    }
+
+    .wave-bars {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 40px;
+    }
+
+    .wave-bar {
+      width: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      height: 8px;
+      transition: height 0.1s ease;
+    }
+
+    .active .wave-bar {
+      animation: soundWave 0.8s infinite ease-in-out alternate;
+    }
+
+    .active .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+    .active .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+    .active .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+    .active .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+
+    @keyframes soundWave {
+      0% { height: 8px; }
+      100% { height: 38px; }
+    }
+
+    .metrics-box {
+      margin-top: 1.5rem;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .metric-row:last-child {
+      border-bottom: none;
+    }
+
+    .metric-label {
+      color: var(--text-muted);
+    }
+
+    .metric-value {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 600;
+    }
+
+    .viz-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      overflow-y: auto;
+    }
+
+    .card {
+      background: rgba(17, 24, 39, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 0.85rem;
+      border-radius: 6px;
+      background: rgba(245, 78, 0, 0.15);
+      color: var(--accent-posthog);
+      border: 1px solid rgba(245, 78, 0, 0.35);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .card-dropoff-alert {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 8px;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+      font-size: 0.875rem;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    .canvas-wrap {
+      position: relative;
+      height: 280px;
+      width: 100%;
+    }
+
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      min-height: 350px;
+      color: var(--text-muted);
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .empty-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hogql-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    .hogql-table th, .hogql-table td {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hogql-table th {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+
+    .hogql-table tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-icon"></div>
+      <div>
+        <span class="brand-title">PRISM</span>
+        <span class="brand-subtitle">Optical Tool Gateway</span>
+      </div>
+    </div>
+    <div class="status-pill">
+      <div id="statusDot" class="status-dot"></div>
+      <span id="statusText">Disconnected</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Left Column: Voice Agent Controller -->
+    <div class="panel">
+      <div class="panel-title">
+        <span>Voice Agent Session</span>
+      </div>
+
+      <div class="controls">
+        <button id="connectBtn" class="btn btn-primary">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+          Connect Voice
+        </button>
+        <button id="disconnectBtn" class="btn btn-danger" style="display: none;">
+          Disconnect
+        </button>
+
+        <div id="audioWave" class="audio-indicator">
+          <div class="wave-bars">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem;">
+          <button id="simulateBtn" class="btn btn-outline">
+            Simulate Funnel Card
+          </button>
+          <button id="simulateErrorsBtn" class="btn btn-outline">
+            Simulate Error Waterfall
+          </button>
+          <button id="simulateRetentionBtn" class="btn btn-outline">
+            Simulate Retention Trend
+          </button>
+          <button id="simulateHogqlBtn" class="btn btn-outline">
+            Simulate HogQL Result
+          </button>
+        </div>
+      </div>
+
+      <div class="metrics-box">
+        <div class="metric-row">
+          <span class="metric-label">Room</span>
+          <span class="metric-value" id="valRoom">prism-demo</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">WebRTC Data Channel</span>
+          <span class="metric-value" id="valDcStatus">Inactive</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Visual Cards Received</span>
+          <span class="metric-value" id="valCardsCount">0</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Last Tool Latency</span>
+          <span class="metric-value" id="valLatency">--</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Visual Spectrum (WebRTC Data Channel Output) -->
+    <div class="panel">
+      <div class="panel-title">
+        <span>Visual Spectrum (PostHog WebRTC Cards)</span>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Topic: posthog-viz-card</span>
+      </div>
+
+      <div id="vizContainer" class="viz-container">
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">&#128202;</div>
+          <h3>Awaiting Visual Data Packet</h3>
+          <p style="max-width: 400px; font-size: 0.875rem; margin-top: 0.5rem;">
+            When the voice agent invokes an analytical tool, the Prism Gateway streams real-time interactive PostHog charts directly over WebRTC Data Channels.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const LiveKit = window.LivekitClient;
+    let room = null;
+    let cardsReceived = 0;
+    const chartInstances = {};
+
+    const connectBtn = document.getElementById('connectBtn');
+    const disconnectBtn = document.getElementById('disconnectBtn');
+    const simulateBtn = document.getElementById('simulateBtn');
+    const simulateErrorsBtn = document.getElementById('simulateErrorsBtn');
+    const simulateRetentionBtn = document.getElementById('simulateRetentionBtn');
+    const simulateHogqlBtn = document.getElementById('simulateHogqlBtn');
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const audioWave = document.getElementById('audioWave');
+    const valDcStatus = document.getElementById('valDcStatus');
+    const valCardsCount = document.getElementById('valCardsCount');
+    const vizContainer = document.getElementById('vizContainer');
+    const emptyState = document.getElementById('emptyState');
+
+    function updateStatus(state, label) {
+      statusDot.className = 'status-dot ' + state;
+      statusText.textContent = label;
+    }
+
+    async function connect() {
+      try {
+        updateStatus('connecting', 'Connecting...');
+        connectBtn.disabled = true;
+
+        const res = await fetch('/api/token?room=prism-demo');
+        if (!res.ok) throw new Error('Token endpoint error: ' + res.statusText);
+        const data = await res.json();
+
+        room = new LiveKit.Room({
+          adaptiveStream: true,
+          dynacast: true,
+        });
+
+        // Handle WebRTC Data Channel messages (Contract A)
+        room.on(LiveKit.RoomEvent.DataReceived, (payload, participant, kind, topic) => {
+          console.log('[Prism DataReceived]', { topic, length: payload.length });
+          const decoder = new TextDecoder();
+          const str = decoder.decode(payload);
+          try {
+            const cardData = JSON.parse(str);
+            renderCard(cardData);
+          } catch (e) {
+            console.error('Failed to parse WebRTC data payload:', e);
+          }
+        });
+
+        room.on(LiveKit.RoomEvent.Connected, () => {
+          updateStatus('connected', 'LiveKit Connected');
+          connectBtn.style.display = 'none';
+          disconnectBtn.style.display = 'inline-flex';
+          valDcStatus.textContent = 'Active (Ready)';
+          audioWave.classList.add('active');
+        });
+
+        room.on(LiveKit.RoomEvent.Disconnected, () => {
+          updateStatus('', 'Disconnected');
+          connectBtn.style.display = 'inline-flex';
+          connectBtn.disabled = false;
+          disconnectBtn.style.display = 'none';
+          valDcStatus.textContent = 'Inactive';
+          audioWave.classList.remove('active');
+        });
+
+        // Join room
+        await room.connect(data.url, data.token);
+
+        // Publish local microphone
+        await room.localParticipant.setMicrophoneEnabled(true);
+
+      } catch (err) {
+        console.error('Connection failed:', err);
+        updateStatus('', 'Connection Failed');
+        connectBtn.disabled = false;
+        alert('Could not connect to LiveKit: ' + err.message);
+      }
+    }
+
+    async function disconnect() {
+      if (room) {
+        await room.disconnect();
+        room = null;
+      }
+    }
+
+    function renderCard(card) {
+      if (!card) return;
+      if (card.type === 'error_waterfall') {
+        renderErrorWaterfallCard(card);
+      } else if (card.type === 'retention_trend') {
+        renderRetentionCard(card);
+      } else if (card.type === 'hogql_viz') {
+        renderHogQLCard(card);
+      } else {
+        renderFunnelCard(card);
+      }
+    }
+
+    function prepareCardElement(badgeText, titleText, timestamp) {
+      if (emptyState) emptyState.style.display = 'none';
+      cardsReceived++;
+      valCardsCount.textContent = cardsReceived;
+
+      const cardId = 'card-' + Date.now() + '-' + Math.floor(Math.random()*1000);
+      const cardEl = document.createElement('div');
+      cardEl.className = 'card';
+      cardEl.id = cardId;
+      const formattedTime = new Date((timestamp || Date.now()/1000)*1000).toLocaleTimeString();
+
+      return { cardId, cardEl, formattedTime };
+    }
+
+    function renderFunnelCard(card) {
+      const { cardId, cardEl, formattedTime } = prepareCardElement('PostHog Funnel', card.title || 'Conversion Funnel', card.timestamp);
+      const steps = card.steps || [];
+      const labels = steps.map(s => s.name);
+      const values = steps.map(s => s.visitors);
+      const conversionRates = steps.map(s => s.conversion_rate);
+
+      cardEl.innerHTML = `
+        <div class="card-header">
+          <div>
+            <span class="card-badge">PostHog Funnel</span>
+            <h3 style="margin-top: 0.35rem; font-size: 1.15rem;">${card.title || 'Conversion Funnel'}</h3>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">${formattedTime}</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="canvas-${cardId}"></canvas>
+        </div>
+        ${card.primary_drop_step ? `
+        <div class="card-dropoff-alert">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span><strong>Critical Dropoff:</strong> Largest exit detected at <em>${card.primary_drop_step}</em> step.</span>
+        </div>
+        ` : ''}
+      `;
+
+      vizContainer.prepend(cardEl);
+
+      const ctx = document.getElementById(`canvas-${cardId}`).getContext('2d');
+      chartInstances[cardId] = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Visitors',
+            data: values,
+            backgroundColor: [
+              'rgba(59, 130, 246, 0.85)',
+              'rgba(99, 102, 241, 0.85)',
+              'rgba(245, 78, 0, 0.85)'
+            ],
+            borderColor: [
+              '#3b82f6',
+              '#6366f1',
+              '#f54e00'
+            ],
+            borderWidth: 1.5,
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const idx = context.dataIndex;
+                  return ` Visitors: ${context.parsed.y.toLocaleString()} (${conversionRates[idx]}%)`;
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#9ca3af' }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#d1d5db', font: { weight: 'bold' } }
+            }
+          }
+        }
+      });
+    }
+
+    function renderErrorWaterfallCard(card) {
+      const { cardId, cardEl, formattedTime } = prepareCardElement('Error Waterfall', card.title || 'API Error Waterfall', card.timestamp);
+      const errors = card.errors || [];
+      const labels = errors.map(e => e.error_type);
+      const values = errors.map(e => e.count);
+      const percentages = errors.map(e => e.percentage);
+
+      cardEl.innerHTML = `
+        <div class="card-header">
+          <div>
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">PostHog Error Waterfall</span>
+            <h3 style="margin-top: 0.35rem; font-size: 1.15rem;">${card.title || 'Error Waterfall'}</h3>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">${formattedTime}</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="canvas-${cardId}"></canvas>
+        </div>
+        ${card.primary_root_cause ? `
+        <div class="card-dropoff-alert" style="background: rgba(239, 68, 68, 0.15); color: #fca5a5;">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span><strong>Primary Root Cause:</strong> ${card.primary_root_cause} (${card.total_errors} total occurrences in ${card.timeframe || '24h'}).</span>
+        </div>
+        ` : ''}
+      `;
+
+      vizContainer.prepend(cardEl);
+
+      const ctx = document.getElementById(`canvas-${cardId}`).getContext('2d');
+      chartInstances[cardId] = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            axis: 'y',
+            label: 'Occurrences',
+            data: values,
+            backgroundColor: [
+              'rgba(239, 68, 68, 0.85)',
+              'rgba(245, 158, 11, 0.85)',
+              'rgba(236, 72, 153, 0.85)'
+            ],
+            borderColor: [
+              '#ef4444',
+              '#f59e0b',
+              '#ec4899'
+            ],
+            borderWidth: 1.5,
+            borderRadius: 6
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const idx = context.dataIndex;
+                  return ` Errors: ${context.parsed.x} (${percentages[idx]}%)`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#9ca3af' }
+            },
+            y: {
+              grid: { display: false },
+              ticks: { color: '#d1d5db', font: { weight: 'bold' } }
+            }
+          }
+        }
+      });
+    }
+
+    function renderRetentionCard(card) {
+      const { cardId, cardEl, formattedTime } = prepareCardElement('Cohort Retention', card.title || 'Cohort Retention Trend', card.timestamp);
+      const intervals = card.intervals || [];
+      const labels = intervals.map(i => i.interval);
+      const rates = intervals.map(i => i.retention_rate);
+
+      cardEl.innerHTML = `
+        <div class="card-header">
+          <div>
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border-color: rgba(16, 185, 129, 0.3);">PostHog Retention</span>
+            <h3 style="margin-top: 0.35rem; font-size: 1.15rem;">${card.title || 'Retention Trend'}</h3>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">${formattedTime}</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="canvas-${cardId}"></canvas>
+        </div>
+        <div class="card-dropoff-alert" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #6ee7b7;">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          <span><strong>Terminal Retention:</strong> ${card.terminal_retention}% at Week 8 (${card.cohort_name || 'Weekly Active Users'}).</span>
+        </div>
+      `;
+
+      vizContainer.prepend(cardEl);
+
+      const ctx = document.getElementById(`canvas-${cardId}`).getContext('2d');
+      chartInstances[cardId] = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Retention %',
+            data: rates,
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.15)',
+            tension: 0.3,
+            fill: true,
+            pointBackgroundColor: '#10b981',
+            pointRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return ` Retention: ${context.parsed.y}%`;
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100,
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#9ca3af', callback: v => v + '%' }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#d1d5db', font: { weight: 'bold' } }
+            }
+          }
+        }
+      });
+    }
+
+    function renderHogQLCard(card) {
+      const { cardId, cardEl, formattedTime } = prepareCardElement('HogQL Result', card.title || 'HogQL Analytical Result', card.timestamp);
+      const cols = card.columns || [];
+      const rows = card.rows || [];
+
+      let thHtml = cols.map(c => `<th>${c}</th>`).join('');
+      let trHtml = rows.map(r => `<tr>${r.map(cell => `<td><strong>${typeof cell === 'number' ? cell.toLocaleString() : cell}</strong></td>`).join('')}</tr>`).join('');
+
+      cardEl.innerHTML = `
+        <div class="card-header">
+          <div>
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; border-color: rgba(139, 92, 246, 0.3);">PostHog HogQL Query</span>
+            <h3 style="margin-top: 0.35rem; font-size: 1.15rem;">${card.title || 'HogQL Analytical Result'}</h3>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">${formattedTime}</span>
+        </div>
+        <div style="background: rgba(0, 0, 0, 0.35); padding: 0.75rem 1rem; border-radius: 8px; font-family: monospace; font-size: 0.8rem; color: #a5b4fc; border: 1px solid var(--border); overflow-x: auto;">
+          <code>${card.query || 'SELECT ...'}</code>
+        </div>
+        <table class="hogql-table">
+          <thead><tr>${thHtml}</tr></thead>
+          <tbody>${trHtml}</tbody>
+        </table>
+      `;
+
+      vizContainer.prepend(cardEl);
+    }
+
+    connectBtn.addEventListener('click', connect);
+    disconnectBtn.addEventListener('click', disconnect);
+
+    // Simulation triggers
+    simulateBtn.addEventListener('click', () => {
+      renderCard({
+        type: "funnel_viz",
+        title: "Checkout Conversion Dropoff",
+        funnel_id: "checkout_v2",
+        steps: [
+          { name: "Cart Viewed", visitors: 14200, conversion_rate: 100.0 },
+          { name: "Billing Entered", visitors: 9100, conversion_rate: 64.1 },
+          { name: "Payment Confirmed", visitors: 3200, conversion_rate: 22.5 }
+        ],
+        primary_drop_step: "Payment Confirmed",
+        timestamp: Math.floor(Date.now() / 1000)
+      });
+    });
+
+    simulateErrorsBtn.addEventListener('click', () => {
+      renderCard({
+        type: "error_waterfall",
+        title: "API Error Waterfall (24h)",
+        timeframe: "24h",
+        total_errors: 42,
+        primary_root_cause: "PaymentGatewayTimeout (504)",
+        errors: [
+          { error_type: "PaymentGatewayTimeout (504)", count: 22, percentage: 52.4, status_code: 504 },
+          { error_type: "StripeCardDeclined (400)", count: 13, percentage: 30.9, status_code: 400 },
+          { error_type: "DatabaseDeadlock (500)", count: 7, percentage: 16.7, status_code: 500 }
+        ],
+        timestamp: Math.floor(Date.now() / 1000)
+      });
+    });
+
+    simulateRetentionBtn.addEventListener('click', () => {
+      renderCard({
+        type: "retention_trend",
+        title: "8-Week Cohort Retention Trend",
+        cohort_name: "Weekly Active Users",
+        terminal_retention: 19.5,
+        intervals: [
+          { interval: "Week 1", retention_rate: 100.0, users: 8400 },
+          { interval: "Week 2", retention_rate: 44.2, users: 3712 },
+          { interval: "Week 3", retention_rate: 34.0, users: 2856 },
+          { interval: "Week 4", retention_rate: 28.1, users: 2360 },
+          { interval: "Week 6", retention_rate: 23.4, users: 1965 },
+          { interval: "Week 8", retention_rate: 19.5, users: 1638 }
+        ],
+        timestamp: Math.floor(Date.now() / 1000)
+      });
+    });
+
+    simulateHogqlBtn.addEventListener('click', () => {
+      renderCard({
+        type: "hogql_viz",
+        title: "HogQL Analytical Query Result",
+        query: "SELECT event, count() FROM events WHERE timestamp > now() - INTERVAL 1 DAY GROUP BY event ORDER BY count() DESC LIMIT 5",
+        columns: ["event", "count()"],
+        rows: [
+          ["$pageview", 48200],
+          ["user_signed_up", 1240],
+          ["checkout_step_completed", 890],
+          ["payment_confirmed", 320],
+          ["error_encountered", 42]
+        ],
+        timestamp: Math.floor(Date.now() / 1000)
+      });
+    });
+  </script>
+</body>
+</html>

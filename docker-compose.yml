@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: prism-clickhouse
+    ports:
+      - "8123:8123" # HTTP API
+      - "9000:9000" # Native TCP client protocol
+    environment:
+      CLICKHOUSE_DB: livekit_telemetry
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    restart: unless-stopped
+
+  nats:
+    image: nats:latest
+    container_name: prism-nats
+    ports:
+      - "4222:4222" # NATS client port
+      - "8222:8222" # NATS HTTP management/monitoring
+    restart: unless-stopped
